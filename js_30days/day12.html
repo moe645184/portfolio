@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Key Detection</title>
+    <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+    <script>
+        const input =[]
+        const code ='thanks'
+
+        window.addEventListener('keyup',(e)=>{
+            // console.log(e.key);
+            input.push(e.key)
+            //array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+            //陣列.splice編接(開始之索引位置,刪除元素數量,增加內容)
+            //負數表示從後面數。從後面數來第七個當開始(當input大於我code的字數時就開始刪除)，刪除內容在七個字時會刪除一個字(7-6 = 1)
+            input.splice(-code.length - 1 , input.length - code.length)
+                        //當整個陣列用join合體時，內容含有secretCode時，就可以印出來成功的樣式~ 
+
+            if (input.join('').includes(code)){
+                console.log('you are welcom')
+                cornify_add()
+            }
+            console.log(input)
+        })
+    </script>
+</body>
+
+</html>

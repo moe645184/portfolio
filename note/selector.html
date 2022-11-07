@@ -1,0 +1,450 @@
+<style>
+    * {
+        font-size: 16px;
+    }
+
+    div {
+        border: 1px solid black;
+    }
+
+    /*1-1*/
+
+    /*d-2: .box+*{} .box後面那個兄弟會有{}的效果 */
+    .box+* {
+        color: red;
+    }
+
+    /* e-1:[屬性] */
+    a[href] {
+        color: red;
+    }
+
+    /* e-2:[屬性=某個值] 屬性正好等同"某個值" */
+    a[href="#"] {
+        color: green;
+    }
+
+    /* e-3:[屬性~=某個值] 如果屬性中，有用空格分隔，只要其中有一個符合"某個值"即可。 */
+    a[class~="blue"] {
+        color: blue;
+    }
+
+    /* e-4:[屬性|=某個值] 屬性中，恰好等同"某個值"，或以"某個值"開頭，用-連接，也都符合。 */
+    a[class|="purple"] {
+        color: purple;
+    }
+
+    /* e-5:[屬性^=某個值] 屬性中，以"某個值"為前綴 */
+    a[class^="gray"] {
+        color: gray;
+    }
+
+    /* e-6:[屬性$=某個值] 屬性中，以"某個值"為後綴 */
+    a[href$=".tw"] {
+        color: darkred;
+    }
+
+    /* e-7:[屬性*=某個值] 屬性中，"某個值"有出現過 */
+    a[href*="4"] {
+        color: orange;
+    }
+
+
+    /* e-8:[屬性*=某個值 i] 屬性中，"某個值"不分大小寫的比較 */
+    a[href="TW" i] {
+        color: darkcyan;
+    }
+
+    /* e-9:[屬性*=某個值 s] 屬性中，"某個值"區分大小寫的比較 */
+    a[href="ORG" s] {
+        color: darkblue;
+    }
+
+    /*1-2 */
+    /*a.相鄰選擇器Adjacent sibling selectors: A+B 選相鄰兄弟 */
+    .a1+div {
+        color: red
+    }
+
+    /* b.通用兄弟選擇器General sibling selectors: A~B 選之後的兄弟們 */
+    .b1~.b2 {
+        color: red
+    }
+
+    /* c.子代選擇器Child selectors: A>B 選父層為A的B */
+    pre>.c2 {
+        color: red
+    }
+
+    /* d.後代選擇器Descendant selectors A B 只要祖先有A的B都可以 */
+    pre p {
+        color: red
+    }
+
+    /* b-1: :autofill 當表單選項是自動填的狀態會有的樣式 */
+    /*寫兩個是因為瀏覽器相容問題*/
+    input:-webkit-autofill {
+        border: 3px solid blue;
+    }
+
+    input:autofill {
+        border: 3px solid blue;
+    }
+
+    /* b-2: :enabled 啟用的部分 */
+    input:enabled {
+        background-color: yellow;
+    }
+
+    /* b-3: :disabled 禁用的部分 */
+    input:disabled {
+        background-color: red;
+    }
+
+    /* b-4: :read-only 不能更改的部分 */
+    /*設定attribute[]是為了不要讓別人被蓋住，因為disable也是read-only的狀態*/
+    input[type="text"]:read-only {
+        background-color: green;
+    }
+
+    /* b-5: :read-write 可編輯任何元素的部分 */
+    /*設定attribute[]是為了不要讓他被蓋住，因為沒有disable都會是read-write的狀態*/
+    input[type="email"]:read-write {
+        background-color: orange;
+    }
+
+    /* b-6: :placeholder-shown placeholder顯示的部分 */
+    input:placeholder-shown {
+        background-color: blue;
+    }
+
+    input:default {
+        background-color: purple;
+    }
+
+    /* b-8: :checked 按鈕被checked的時候 */
+
+    input:checked {
+        outline: 2px solid deeppink;
+    }
+
+    /* b-9: :indeterminate 不確定狀態的元素 */
+    input:indeterminate+label {
+        background: darkred;
+    }
+
+    /* b-11: :valid 內容為有效時 */
+    /*設定attribute[]是為了不要讓別人被蓋住*/
+    input[type="password"]:valid {
+        background-color: darkorange;
+    }
+
+    /* b-12: :invalid 內容為無效時 */
+    input:invalid {
+        background-color: darkgoldenrod;
+    }
+
+    /* b-13: :in-range 搭配具範圍限制的元素，在範圍內時 如：number */
+    input[data-name="effect_inrange"]:in-range {
+        background-color: darkgreen;
+    }
+
+    /* b-14: :out-of-range 搭配具範圍限制的元素,不在範圍內時 */
+    input[data-name="effect_outofrange"]:out-of-range {
+        background-color: darkblue;
+    }
+
+    /* b-15: :required 在input添加required的屬性，即可在CSS設定 */
+    input[data-name="effect_required"]:required {
+        border: 5px dashed red;
+    }
+
+    /* b-16: :optional 在input未添加任何屬性的，即可在CSS設定 */
+    input[data-name="effect_optional"]:optional {
+        border: 5px dashed orange;
+    }
+
+    /* d-5: :target 被當成連結的目標時 */
+    p:target {
+        background-color: gold;
+        color: blue;
+    }
+
+    /* g1: :root 表示文件樹的根元素，會用來宣告CSS全域變數  */
+    :root{
+        --blue:#1e90ff;
+    } 
+    .g1_1{
+        color:var(--blue);
+    }
+
+    /* k. ::selection 喜歡，將反白的部分設定樣式 */
+    ::selection {
+        color: gold;
+        background-color: red;
+    }
+</style>
+
+<pre>
+<h1>選擇器Selector</h1><small>資料來源：https://developer.mozilla.org/en-US/docs/Glossary/CSS_Selector</small>
+
+1.基本選擇器
+
+    1-1類型選擇器
+
+        a.元素選擇器(Type selectors)：tagName 選元素(p div...等等)
+            div{color:red;}
+
+        b.class選擇器(Class selectors)：className 選class
+            .box{color:red;}
+
+        c.ID選擇器(ID selectors)：#idName 選id
+            #box{color:red;}
+
+        d.通用選擇器(Universal selectors): * 全選
+            d-1: *{} 全部都會有{}裡的效果
+            *{padding:0;}
+            d-2: .box+*{} .box後面那個兄弟會有{}的效果
+            .box{box}*2+.box1{box1}+.box{box} css: .box+*{color:red}
+            <div class="box">box</div>
+            <div class="box">box</div>
+            <div class="box1">box1</div>
+            <div class="box">box</div>
+*只要是.box後面的那個兄弟都會有效果，但.box1後面就不會有喔!
+
+        e.屬性選擇器Attribute selectors： [] 選屬性
+
+            e-1:[屬性]
+                a[href]{color:red;} a標籤具有href屬性的文字就會變紅色
+                <a href="#123">href="#123</a>
+
+            e-2:[屬性=某個值] 屬性正好等同"某個值"
+                a[href="#"]{color:red;} a標籤具有href="#"屬性的文字就會變紅色
+                <a href="#">href="#"</a>
+
+            e-3:[屬性~=某個值] 如果屬性中，有用空格分隔，只要其中有一個符合"某個值"即可。
+                a[class~="blue"]{color:yellow;} a標籤的class只要兩個或兩個以上，其中一個為"yellow"即可達到效果
+                <a class="red blue" href="#">class="red blue" href="#"</a>
+
+            e-4:[屬性|=某個值] 屬性中，恰好等同"某個值"，或以"某個值"開頭，用-連接，也都符合。
+                a[class|="purple"]{color:purple;} a標籤的class開頭purple就可以吃到
+                <a class="purple-color" href="#">class="purple-color" href="#"</a>
+
+            e-5:[屬性^=某個值] 屬性中，以"某個值"為前綴
+                a[class^="gray"]{color:gray;} a標籤的class開頭purple就可以吃到
+                <a class="gray-color" href="#">class="gray-color" href="#"</a>
+                然後就發現e-4跟e-5作用差不多。(歡迎實驗報告ˊˇˋ)
+
+            e-6:[屬性$=某個值] 屬性中，以"某個值"為後綴
+            a[href=".tw"]{color:darkred;} a標籤的href最後是".tw"就可以吃到
+                <a href="http://yahoo.com.tw">href="http://yahoo.com.tw"</a>
+
+            e-7:[屬性*=某個值] 屬性中，"某個值"有出現過
+                a[href*=4]{color:orange;} a標籤具有href屬性的文字就會變橘色
+                <a href="#1234">href="#1234</a>
+
+            e-8:[屬性*=某個值 i] 屬性中，"某個值"不分大小寫的比較
+                a[href="TW" i]{color:darkblue;} a標籤的href最後是".tw"就會變成深藍色
+                <a href="tw">href="tw"</a>
+
+            e-9:[屬性*=某個值 s] 屬性中，"某個值"區分大小寫的比較
+                a[href="ORG" s]{color:darkblue;} 跟e-8同樣的狀況下，用i就不會有效果，而是吃到a[href]的紅色
+                <a href="org">href="org"</a>
+
+        f.狀態選擇器State selectors: : 狀態偽類選擇器 這部分留到偽類一起
+
+    1-2複合選擇器
+
+        a.相鄰選擇器Adjacent sibling selectors: A+B 選相鄰兄弟
+            .a1+div{color:red} 表示.a1下一個兄弟文字會是紅色的
+            <div class="a1">a1</div>
+            <div class="a2">a2 <p>a2的子代p</p> </div>
+            <div class="a3">a3</div>
+
+        b.通用兄弟選擇器General sibling selectors: A~B 選之後的兄弟們
+            .b1~div{color:red} 表示.b1之後的每個.b2兄弟文字會是紅色的
+            <div class="b1">b1</div>
+            <div class="b2">b2 <p>b2的子代p</p></div>
+            <div class="b2">b2</div>
+        c.子代選擇器Child selectors: A>B 選父層為A的B
+            pre > .c2{color:red} 表示父代為pre的.c2會是紅色的
+            <div class="c1">c1</div>
+            <div class="c2">c2<p>c2的子代p</p></div>
+            <div class="c3">c3</div>
+
+        d.後代選擇器Descendant selectors A B 只要祖先有A的B都可以
+            pre > p {color:red} 表示祖先有人是pre的p都會有效果
+            <div class="d1">d1</div>
+            <div class="d2">d2<p>d2的子代p</p></div>
+            <div class="d3">d3</div>
+
+    1-3偽類選擇器Pseudo蘇斗 classes:在特殊狀態下被選取的話，會作為關鍵字被加到選擇器裡面。
+        a.元素顯示狀態偽類Element display state pseudo-classes：這些偽類可以根據元素的顯示狀態來選擇元素。
+            *這部分目前還沒碰到，先放著。
+            a-1: :fullscreen 處在全螢幕模式下
+            a-2: :modal 看不懂。
+            a-3: :picture-in-picture 跟影音處理有關，可以做成子母視窗(未來再研究)
+        b.輸入偽類Input pseudo-classes：這些偽類與表單元素相關，可以根據 HTML 屬性和交互前後字段的狀態來選擇元素。
+            b-1: :autofill 當表單選項是自動填的狀態會有的樣式
+<form>
+當自動輸入名字時，會變藍框<input type="name" name="name">*input內設定name=""
+input:autofill {border: 3px solid blue}
+</form>
+            b-2: :enabled 啟用的部分
+<form>
+當input是enable時，會變黃色背景<input type="name" >*input預設
+input:enabled{background-color: yellow;}
+</form>
+            b-3: :disabled 禁用的部分
+<form>
+當input是disable時，會變紅色背景<input type="name" disabled>*input內設定disabled
+input:disabled{background-color: red;}
+</form>
+            b-4: :read-only 不能更改的部分
+<form>
+當input是read-only，會變綠色背景<input type="text" readonly>*input內設定readonly
+input:read-only{background-color: green;}
+</form>
+            b-5: :read-write 可編輯任何元素的部分
+<form>
+當input是read-write，會變橘色背景<input type="email">*input預設就是read-write
+input:read-only{background-color: orange;}
+</form>
+            b-6: :placeholder-shown placeholder顯示的部分
+<form>
+當input是有placeholder時，會變藍色背景<input type="text" placeholder="這是placeholder">*input內設定placehoder
+input:placeholder-shown{background-color: blue;}
+</form>
+            b-7: :default 表單被checked跟提交按鈕的部分
+<form>
+當input被checked或是submit時，會變紫色背景<input type="submit">*input內設定type="submit"
+input:default{background-color: purple;}
+</form>
+            b-8: :checked 按鈕被checked的時候
+<form>   
+當input被checked時，會變成粉紅色邊框<label for="check"><input id="check" type="checkbox">*input內設定type="checkbox"</label>
+input:checked {outline: 2px solid deeppink;}
+</form> 
+            b-9: :indeterminate 不確定狀態的元素
+<form>   
+當input還沒被碰過時，會變成深紅色背景 *都不用做就是未確定的狀態。
+<input type="radio" id="radio1" name="radioButton">input type="radio" id="radio1" name="radioButton"
+<label for="radio1">label for="radio1"</label>
+<input type="radio" id="radio2" name="radioButton">input type="radio" id="radio2" name="radioButton"
+<label for="radio2">label for="radio2"</label>
+input:indeterminate+label {background: darkred;}
+*因為選項(radio / checkbox)會有一堆效果吃不到，所以會用+之類的選擇器選去其他的對象
+</form>            
+            b-10: :blank 空白，或包含一個空字符串或其他空輸入。*目前都沒有瀏覽器支援喔
+
+            b-11: :valid 內容為有效時
+        
+<form>   
+當input有用的時後，會變成深橘色背景<input type="password">
+input:valid {background-color: darkorange};
+</form> 
+            b-12: :invalid 內容為無效時
+<form>   
+當input輸入的內容無效時，會變成深黃色背景<input type="number" value="5" min="18">input type="number" value="5" min="18"
+input:invalid {background-color: darkyellow};
+</form> 
+            b-13: :in-range 搭配具範圍限制的元素，在範圍內時 如：number
+<form>   
+當input輸入的內容在範圍內時，會變成深綠色背景<input data-name="effect_inrange" type="number" value="5" min="18">input type="number" value="5" min="18"
+input:in-range {background-color: darkgreen};
+</form> 
+            b-14: :out-of-range 搭配具範圍限制的元素,不在範圍內時
+<form>   
+當input輸入的內容不在範圍內時，會變成深藍色背景<input data-name="effect_outofrange" type="number" value="5" min="18">input type="number" value="5" min="18"
+input:out-of-range {background-color: darkblue};
+</form>
+            b-15: :required 在input添加required的屬性，即可在CSS設定
+<form>   
+當input具有required的屬性時，會有紅色虛線效果的框<input data-name="effect_required" type="text" required>input data-name="effect_required" type="text" required *input內設定type="required"
+input:required {border:5px dashed red};
+</form>
+            b-16: :optional 在input未添加任何屬性的，即可在CSS設定
+<form>   
+當input不具任何屬性時，會有橘色虛線效果的框<input data-name="effect_optional" type="text">input data-name="effect_required" type="text" required *input內設定type="required"
+input:optional {border:5px dashed orange};
+</form> 
+            b-17: :user-invalid 目前只有火狐有用，如果填入不合法回應時。
+
+        c.語言偽類Linguistic pseudo-classes:
+
+            c-1: :dir(ltr或rtl) 由文字書寫的方向右至左或左至右 *目前只有火狐瀏覽器可用
+            .C_1*2 > span .C_1分別設置 dir="ltr" dir="rtl"  
+            <div class="C_1" dir="ltr"><span >從左到右</span></div>
+            <div class="C_1" dir="rtl"><span >從右到左</span></div>
+
+            c-2: :lang(語言) 由設定的語言lang屬性，來設定 *:lang()用在子層是q的元素，但我怎麼用都不理我，決定先放置。
+            .C_2*2>q .C_2分別設置 lang="en" lang="fr" 
+            <div class="C_2" lang="en">
+                <q>This English quote is red</q> 
+            </div>
+            <div class="C_2" lang="fr">
+                <q>This French quote is blue</q>
+            </div>
+
+        d.位置偽類Location pseudo-classes：
+            d-1: :any-link 任何有連結的地方
+            d-2: :link 任何未被造訪的連結
+            d-3: :visited 已被造訪的連結
+            d-4: :local-link 本地的連結 但目前沒有任何瀏覽器支援
+            d-5: :target 被當成連結的目標時
+            點擊a連結時，會跳至#target，目標會有樣式。CSS設定為p:target{background-color: gold;color:blue;}
+            <a href="#target">a href="#target"</a>
+            <p id="target">p id="target</p>
+            
+            d-6: :target-within 任何內容已直接鏈接到(我也不懂R) 目前沒有瀏覽器支援
+            d-7: :scope 我真的看不懂Q_Q哪天懂了再更新，看起來滿常用的
+
+        e.資源狀態偽類Resource state pseudo-classes：
+            e-1: :playing 表示該元素在播放時的效果
+            e-2: :paused 表示該元素在暫停時的效果
+
+        f.時間維度偽類Time-dimensional pseudo-classes：
+            f-1: :current
+            f-2: :past
+            f-3: :future
+            以上好像還用不到，先放著。
+
+        g.樹狀結構偽類Tree-structural pseudo-classes：
+            g1: :root 表示文件樹的根元素，會用來宣告CSS全域變數 
+                CSS設定為:root{--blue:#1e90ff} .g1_1{color:var(--blue)}
+                <div class="g1">div class="g1"</div>
+            g2: :empty 當該元素裡面無任何子元素。子節點可以是元素節點或者文字(含空格)
+            g3: :nth-child(數字) 好用又神秘的妖物！詳情去看另一篇妖物百科
+            g4: :nth-last-child(數字) 同上，只是從後面來。
+            g5: :first-child 同上，只是變成第一個
+            g6: :last-child 同上，只是變成最後一個
+            g7: :only-child 同上，只是變成唯一的那個
+            g8: :nth-of-type 妖物第二彈，同樣在另外一篇妖物百科
+            g9: :nth-last-of-type 同上，只是變成最後一個
+            g10: :first-of-type 同上，只是變成第一個
+            g11: :last-of-type 同上，只是變成最後一個
+            g12: :only-of-type 同上只是變成唯一的那個
+
+        h.使用者行為偽類User action pseudo-classes:
+            h1: :hover 你的好朋友，當滑鼠在上方時
+            h2: :active 你的好朋友，當左鍵點擊時
+            h3: :focus 通常都是表單，點擊聚焦時
+            h4: :focus-visible 該元素為可被看見焦點的元素時
+            h5: :focus-whthin 只要子代有focus時，從該元素子代開始全家被選取(方便該處全部凸顯)
+
+    1-4偽元素選擇器Pseudo elements: CSS偽元素添加到選擇器的關鍵字，可讓設置所選元素的特定部分的樣式
+            a. ::after 你的好朋友，在所選的元素增加一個最後的子元素
+            b. ::before 你的好朋友，在所選的元素增加一個第一的子元素
+            c. ::backdrop 影片全螢幕播放時，本來黑色的背景，就可以用這個改顏色。
+            d. ::cue 元素內WebVTT提示，總之不是目前要了解的部分。
+            e. ::first-letter 設定第一個字母的樣式
+            f. ::first-line 設定第一行的樣式
+            g. ::file-selector-button 設定檔案選擇的按鈕樣式(針對input的type是file)
+            h. ::marker 用在li，可以設定開頭的樣式
+            i. ::part 這個好像很強，等學到shadow DOM時，應該就會知道了。
+            j. ::placeholder 你的好朋友，可以預設不感擾的預設字在input上(但好像都在input行內寫了)
+            k. ::selection 喜歡，將反白的部分設定樣式
+                CSS設定為::selection {color: gold;background-color: red;}
+            <div class="selection">反白我啊啊啊啊啊啊啊啊</div>
+
+</pre>

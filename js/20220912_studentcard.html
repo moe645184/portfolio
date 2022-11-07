@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+        box-sizing: border-box;
+    }
+
+    main {
+        display: flex;
+        width: 100%;
+        padding: 50px;
+        flex-wrap: wrap;
+        background: linear-gradient(270deg, #79D0F2, #BDCFF2);
+    }
+
+    main .student_list {
+        width: calc(100% - 300px);
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    main .student_list .student_card {
+        width: 300px;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 30px;
+        border-radius: 10px;
+        background: #63B0F2;
+        box-shadow: 3px 3px 5px gray;
+    }
+
+    main .student_list .student_card:hover {
+        transform: scale(1.1);
+    }
+
+    main .student_list .student_card:active {
+        border: brown dashed 2px;
+    }
+
+    main .student_list .student_card:active::before {
+        content: '喵喵喵';
+    }
+
+    main .student_list .student_card img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+
+    main .student_info {
+        width: 300px;
+        font-size: 26px;
+        background-color: #BF244E;
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 50px;
+    }
+
+    main .student_info p {
+        color: #FFFFFF
+    }
+</style>
+
+<body>
+    <main>
+        <div class="student_list">
+        </div>
+        <div class="student_info">
+            <p>此學生的段考成績為</p>
+            <p>國文: </p>
+            <p>英文: </p>
+            <p>數學: </p>
+            <p>平均分數為: </p>
+        </div>
+    </main>
+</body>
+
+<script>
+    const std_gender = ['男', '男', '女', '女']
+    const std_name = ['陳火昱', '蛇昌昌', '邱華華', '吉娃娃']
+
+    const math_grade = [50, 70, 90, 100]
+    const chinese_grade = [10, 50, 40, 100]
+    const english_grade = [30, 70, 50, 100]
+
+    //四張學生卡片
+    let studentList = document.querySelector('.student_list')
+    for (i = 0; i < std_gender.length; i++) {
+
+        //根據是否為男，決定圖片路徑是哪一張 **學起來!!!!!
+        //img的圖
+        var img 
+        if (std_gender[i] == '男') {
+            img = './img/cat1.jpg'
+        }
+        else {
+            img = './img/cat3.jpg'
+        }
+
+        
+
+        studentList.innerHTML += `
+        <div class="student_card">
+            <img src="${img}" alt="無法顯示">
+            <p>${std_name[i]}</p>
+            <p>${std_gender[i]}</p>
+            <p>學號:${i + 1}</p>
+        </div>
+        `
+
+    }
+    //點擊卡片，產生分數
+    const studentCard = document.querySelectorAll('.student_card')
+    let studentInfo = document.querySelector('.student_info')
+    //let i = 0很重要一定要寫，不然他的迴圈會一直下去，每次點擊的i都會是最後一個
+    for ( let i = 0; i < studentCard.length; i++) {
+        //讓所有卡片都有onclick效果
+        studentCard[i].onclick = function () {
+            let averge = (chinese_grade[i] + english_grade[i] +math_grade[i]) / 3
+            studentInfo.innerHTML = `
+            <p>此學生的段考成績為</p>
+            <p>國文:${chinese_grade[i]}</p>
+            <p>英文:${english_grade[i]}</p>
+            <p>數學:${math_grade[i]}</p>
+            <p>平均分數為: ${averge.toFixed(0)}</p>
+            `
+
+    // let i = 0 寫 i = 0 的話 就會需要用以下做!!!!!
+    // for ( i = 0; i < studentCard.length; i++) {          
+            // 用點擊到的卡片內容，把內容刪去到剩下名字的部分，再找出該名字在std_name的位置，再以該位置當成基準，找出成績
+            // console.log(std_name.indexOf(`${this.textContent.slice(0, 3)}`))
+            // let averge = (chinese_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)] + english_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)] + math_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)]) / 3
+            // console.log(averge)
+            // studentInfo.innerHTML = `
+            // <p>此學生的段考成績為</p>
+            // <p>國文: ${chinese_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)]}</p>
+            // <p>英文: ${english_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)]}</p>
+            // <p>數學: ${math_grade[std_name.indexOf(`${this.textContent.slice(0, 3)}`)]}</p>
+            // <p>平均分數為: ${averge.toFixed(0)}</p>
+            // `
+        }
+    }
+
+</script>
+
+</html>

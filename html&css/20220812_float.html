@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <style>
+         .box1{
+      width: 200px;
+      height: 50px;
+      background-color: red;
+      float:left;
+    }
+    .box2{ 
+      width: 150px;
+      height: 150px;
+      float:left;
+      clear:left;
+    }
+.box2-1{
+  height: 90px;
+  width: 100%;
+}
+.box2-1-1{
+  width: 50px;
+  height: 100%;
+  background-color: yellow;
+  float:left;
+}
+/* 偷懶用width:100%;完成，正確要切2-1-2再分2-1-2-1到2-1-2-3三塊 */
+.box2-1-2{
+  width: 100%;
+  height: 30px;
+  background-color: grey;
+}
+.box2-1-3{
+  width: 100%;
+  height: 30px;
+  background-color: purple;
+}
+.box2-1-4{
+  width: 100%;
+  height: 30px;
+  background-color: aqua;
+}
+.box2-2{
+  height: 60px;
+  width: 100%;
+}
+.box2-2-1{
+  width: 100%;
+  height: 30px;
+  background-color: green;
+}
+.box2-2-2{
+  width: 100%;
+  height: 30px;
+  background-color: blue;
+}
+    .box3{ 
+      width: 50px;
+      height: 150px;
+      background-color: pink;
+      float:left;
+    }
+    .box4{ 
+      width: 200px;
+      height: 50px;
+      background-color: brown;
+      float:left;
+      clear:left;
+    }
+    </style>
+  <div class="box1">1</div>
+  <div class="box2">
+    <div class="box2-1">
+      <div class="box2-1-1">2-1-1</div>
+      <div class="box2-1-2">2-1-2</div>
+      <div class="box2-1-3">2-1-3</div>
+      <div class="box2-1-4">2-1-4</div>
+    </div>
+    <div class="box2-2">
+      <div class="box2-2-1">2-2-1</div>
+      <div class="box2-2-2">2-2-2</div>
+    </div>
+  </div>
+  <div class="box3">3</div>
+  <div class="box4">4</div>
+</body>
+</html>

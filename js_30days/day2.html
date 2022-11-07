@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        height: 100vh;
+        width: 100%;
+        background: radial-gradient(grey,white);
+        font-family : Arial ;
+    }
+
+    .time_report{
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 50px;
+        background: #FFF;
+        height: 100px;
+        width: 500px;
+        margin: auto;
+        border-radius: 15px;
+        padding-top: 10px;
+        border: 3px solid black;
+    }
+
+    .time_report::first-line{
+        font-size: 34px;
+    }
+
+    .clock{
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        outline: 10px solid black;
+        background-image: url(./clock.png);
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        /* CSS有濾鏡可以玩!! */
+        filter:drop-shadow(10px 10px 20px blue) invert(87%);
+    }
+
+    .hour_hand{
+        position: absolute;
+        width: 12px;
+        height: 100px;
+        background-color: white;
+        border: 3px solid black;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        left: 0;
+        right: 0;
+        bottom: 50%;
+        margin: auto;
+        /* 讓我rotate不要歪掉，預設是center center */
+        transform-origin:bottom center;
+    }
+
+    .minute_hand{
+        position: absolute;
+        width: 8px;
+        height: 160px;
+        background-color: white;
+        border: 2px solid black;
+        left: 0;
+        right: 0;
+        bottom: 50%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin: auto;
+        transform-origin:bottom center;
+
+    }
+
+    .second_hand{
+        position: absolute;
+        width: 3px;
+        height: 180px;
+        background-color: black;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        left: 0;
+        right: 0;
+        bottom: 50%;
+        margin: auto;
+        transform-origin:bottom center;
+    }
+    
+    .dot{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        outline: 5px black solid;
+        border-radius: 50%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+</style>
+<body>
+    <div class="time_report"></div>
+    <div class="clock">
+        <div class="hour_hand"></div>  
+        <div class="minute_hand"></div>
+        <div class="second_hand"></div>
+        <div class="dot"></div>
+    </div>
+</body>
+
+<script>
+let timeReport = document.querySelector('.time_report')
+let hourHand = document.querySelector('.hour_hand')
+let minuteHand = document.querySelector('.minute_hand')
+let secondHand = document.querySelector('.second_hand')
+let week = ['一','二','三','四','五','六','日']
+
+
+    //為什麼要設涵式？為了用setInterval，讓這個函式可以每秒更新!
+    //這個變數一定要寫在裡面，這樣才會每秒更新!!!!
+    function times(){
+    let time = new Date()
+    let year = time.getFullYear()
+    let month = time.getMonth()
+    let date = time.getDate()
+    let day = time.getDay()
+    let hour = time.getHours()
+    let minutes = time.getMinutes()
+    let seconds = time.getSeconds()
+
+    //做出一個面板，顯示現在時間
+    timeReport.innerHTML=`今天是 ${year}年${month + 1 }月${date}日 星期${week[day]} </br>現在時間${hour}點${minutes}分${seconds}秒`
+
+    //設定時鐘針轉的角度
+    let hourDeg = hour * 30
+    let minutesDeg = minutes * 6
+    let secondsDeg = seconds * 6
+    hourHand.style.transform = `rotate(${hourDeg}deg)`
+    minuteHand.style.transform = `rotate(${minutesDeg}deg)`
+    secondHand.style.transform = `rotate(${secondsDeg}deg)`
+    }
+    
+    //讓時間可以每秒更新
+    setInterval(times,1000)
+
+
+</script>
+
+</html> 

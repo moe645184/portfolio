@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrap {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .wrap .grade {
+        width: 40%;
+        height: 50%;
+        border: 5px solid black;
+        text-align: center;
+        padding: 40px;
+        border-radius: 10px;
+    }
+
+    .wrap .grade input {
+        margin: 20px 0;
+        display: block;
+        margin-left: 50%;
+        transform: translate(-50%, 0);
+
+    }
+
+    .wrap .grade button {
+        margin: 20px 0;
+        display: block;
+        margin-left: 50%;
+        transform: translate(-50%, 0);
+
+    }
+
+    .wrap .standard {
+        width: 40%;
+        height: 50%;
+        text-align: center;
+        border: 5px solid black;
+        padding: 40px;
+        border-radius: 10px;
+
+    }
+
+    .wrap .standard ul {
+        font-size: 32px;
+    }
+
+    .wrap .standard li {
+        list-style: none;
+        margin: 20px;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="grade">
+            <h1>成績分級系統</h1>
+            <h2>請輸入考試成績</h2>
+            <input type="text" placeholder="請輸入成績">
+            <button>計算!!!</button>
+            您輸入的分數是<span class="point">&nbsp;&nbsp;&nbsp;&nbsp;</span>分，您學期成績是：<span class="grading"></span>
+        </div>
+        <div class="standard">
+            <ul>成績參考標準</ul>
+            <li>0~59 =>您的成績不及格</li>
+            <li>60~69 =>您的成績是丁級</li>
+            <li>70~79 =>您的成績是丙級</li>
+            <li>80~89 =>您的成績是乙級</li>
+            <li>90~99 =>您的成績是甲級</li>
+            <li>100 =>您的成績是優級</li>
+        </div>
+    </div>
+</body>
+<script>
+    const score = document.querySelector('input');
+    const calc = document.querySelector('button');
+    const point = document.querySelector('.point');
+    const grading = document.querySelector('.grading');
+    let grades;
+
+    calc.onclick = function () {
+        point.textContent = (`${score.value}`);
+        //解決 大於100 小於0/ 非數字 is NaN / 空白未填 trim去除空白後再比較 /小數(要先將字串變成數字再來確認是否為小數)
+        if (score.value > 100 || score.value < 0 || isNaN(score.value) || score.value.trim()=='' || !Number.isInteger(Number(score.value))){
+            grades = '請確認分數'
+        } else {
+            if (score.value == 100) {
+                grades = '優'
+            } else if (score.value >= 90) {
+                grades = '甲'
+            } else if (score.value >= 80) {
+                grades = '乙'
+            } else if (score.value >= 70) {
+                grades = '丙'
+            } else if (score.value >= 60) {
+                grades = '丁'
+            } else if (score.value < 60) {
+                grades = '不及格'
+            } else (grades = '請確認分數')  
+        }
+        grading.textContent = `${grades}`;
+        //textContent 跟innerHTML的差別：innerHTML會把裡面全部都刪除，變成輸入的內容，也就可以放入H1 p之類的標籤(記得要完整地打出標籤)
+        //let 跟var 的差別：作用區域！ let 只會在括號範圍作用，而 var 全部都會作用 
+    }
+</script>
+
+</html>

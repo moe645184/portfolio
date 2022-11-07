@@ -1,0 +1,160 @@
+<style>
+    * {
+        padding: 0;
+    }
+
+    div{
+        border: 1px solid black;
+    }
+    .wrap{
+        width: 150px;
+        height: 150px;
+    }
+
+/* 範例1-1 : of-type正常運作 */
+    .box:nth-of-type(2){
+        background-color: yellow;
+    }
+
+/* 範例1-2：of-type失靈 */
+    .bbb:nth-of-type(1){
+        background-color: yellow;
+    }
+
+    p{
+        border: 1px solid black;
+    }
+/* 範例1-3：of-type神秘靈 */
+    .ddd:nth-of-type(1){
+        background-color: yellow;
+    }
+
+/* 範例2-1 : chlid正常運作 */
+    .eee:nth-child(2){
+        background-color:yellow
+        }
+
+/* 範例2-2 : nth-child失靈：找不到的tag / class / id */
+    .ggg:nth-child(1){
+        background-color:yellow
+    }
+
+/* 範例3-1 : nth-child(n) /nth-of-type(n)   n 可以為odd / even / n  */
+    .hhh:nth-child(odd){
+        background-color:yellow
+    }
+
+/* 4.沒空：抓兄弟，有空：抓小孩 */
+    .wrap_1:nth-child(n){
+        background-color:yellow
+    }
+
+    .wrap_2 :nth-child(1){
+        background-color:yellow
+    }
+
+</style>
+
+<pre>
+<strong style="font-size:20px;">妖物介紹：偽類選擇器 nth-of-type() & nth-child()</strong>
+<small>參考網址：金魚老師：http://csscoke.com/2013/09/21/%E4%BD%BF%E7%94%A8css3-nth-childn-%E9%81%B8%E5%8F%96%E5%99%A8%E8%A9%B3%E8%A7%A3/
+         網路文章：https://www.footmark.com.tw/news/web-design/css/css-pseudo-class-selectors/
+         IT邦幫忙：https://ithelp.ithome.com.tw/articles/10218139
+</small>
+<strong>0：nth是偽類選擇器(Pseudo-classes)，跟hovr那些是一樣的！</strong>
+    <small>注意：before after first-line first-letter是偽元素選擇器(pseudo-elements)，形式上區別前者(偽類選擇器)是冒號(:)，後者是兩個冒號(::)</small>
+</div>
+<strong>1. E:nth-of-type(n): 找到 E 的所有兄弟元素，然後依先後順序從 1 開始排序 (排序計算類型<span style="color:red;">僅包含 E 元素</span>)，選取第 n 個元素</strong>
+    限制：1.同個父層中，只能一個TagName配一個className或IdName，才能使用，不然會變成nth-child的用法。
+        2.同個父層，不同TagName卻有相同ClassName或IdName時，會變成另外一個TagName位置在哪裡，兩者會一起在那個數字下吃到效果(還有保持nth-of-type的用法)
+
+    <strong>範例1-1:of-type正常運作，在三個當中，我想要第二個class是box的div變色</strong>
+    .wrap>.box{box}*3  CSS設定為.box:nth-of-type(2){background-color:yellow}
+    <div class="wrap">
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+    </div>
+
+    <strong>範例1-2：of-type失靈：同tag不同class / id</strong>
+    .wrap>.aaa+.bbb  CSS設定為.bbb:nth-of-type(1){background-color:yellow}
+    <div class="wrap">
+        <div class="aaa">aaa</div>
+        <div class="bbb">bbb</div>
+    </div>
+    沒有效果，因為此時會是抓到.aaa的第一個，而這不是.bbb所以自然不會有效果(nth-child)，當數字改成2時bbb才會出現效果。
+
+    解決方法：把其中一個tagName換掉。
+    .wrap>p.aaa+.bbb  CSS設定為.bbb:nth-of-type(1){background-color:yellow}
+    <div class="wrap">
+        <p class="aaa">aaa</p>
+        <div class="bbb">bbb</div>
+    </div>
+
+    <strong>範例1-3：of-type神秘靈：不同tag 同class / id </strong>
+    .wrap>.ddd{ddd}*2+p{ddd}.ddd  CSS設定為.ddd:nth-of-type(1){background-color:yellow}
+    <div class="wrap">
+        <div class="ddd">ddd</div>
+        <div class="ddd">ddd</div>
+        <p class="ddd">ddd</p>
+    </div>
+    div的ddd跟p的ddd同時亮起來啦!但照認知，應該只有第一個div的ddd亮而已。
+    解決方法：無。要不，不要用同一個class好嗎Q_Q?
+
+    小結論：只要用tagName抓絕對不會出事。要用其它抓，就注意一下前面的例子。
+    <small>滿大機率可能是以tagName為基礎的去抓目標(畢竟tagName不會被亂改名字，id跟class名稱千萬種。)*僅為個人推論。</small>
+
+<strong>2. E:nth-child(n): 找到 E 的所有兄弟元素，然後依先後順序從 1 開始排序 (排序計算類型<span style="color:red ;">包含所有元素</span>)，選取第 n 個元素</strong>
+
+    <strong>範例2-1:nth-child正常運作，在三個當中，我想要第二個class是box的div變色</strong>
+    .wrap>.eee{eee}*3  CSS設定為.eee:nth-child(2){background-color:yellow}
+    <div class="wrap">
+        <div class="eee">eee</div>
+        <div class="eee">eee</div>
+        <div class="eee">eee</div>
+    </div>
+
+    <strong>範例2-2:nth-child失靈：找不到的tag / class / id</strong>
+    .wrap>.fff{fff}*2+.ggg{ggg}  CSS設定為.ggg:nth-child(1){background-color:yellow}
+    <div class="wrap">
+        <div class="fff">fff</div>
+        <div class="fff">fff</div>
+        <div class="ggg">ggg</div>
+    </div>
+    按照of-type的模式應該要選的到啊！這時我們要回到定義，沒錯，他會找出所有兄弟，按照順序排隊，不管你誰都按照順序！因此，這裡的解決方法，就是改成3！
+    <small>這裡就當成輸入1的時候，對象是class fff，不是ggg，所以沒有符合，效果不會出現。直到3，符合對象，所以效果產生！</small>
+
+<strong>3.n除了是數字以外，也可以使用n 全部 / odd 奇數 /even 偶數</strong>
+
+    <strong>範例3-1：將n改成odd</strong>
+    .wrap>.hhh{hhh}*3  CSS設定為.hhh:nth-child(odd){background-color:yellow}
+    <div class="wrap">
+        <div class="hhh">hhh</div>
+        <div class="hhh">hhh</div>
+        <div class="hhh">hhh</div>
+    </div>
+    此時，第一個跟第三個hhh就會變成黃色的了。
+
+<strong>4.抓子代：只要空格就可以E:nth-child(n) :即可。(沒空：抓兄弟，有空：抓小孩)。</strong>
+
+    <strong>範例4-1：沒有空白</strong>
+    .wrap.wrap_1>iii{iii}*3  CSS設定為.wrap_1:nth-child(1){background-color:yellow}
+    <div class="wrap wrap_1">  
+        <div class="iii">iii</div>
+        <div class="iii">iii</div>
+        <div class="iii">iii</div>
+    </div>
+    這邊的code會發現我抓n，是因為我是pre的子代rrrrrr，代表我必須要去算我是pre裡面的第幾個。所以請開一個新的複製貼上這部分。
+    然後會發現這個wrap全部都會變色，原因是這是直接抓wrap_1的兄弟，然後符合的只有自己(目前)
+    <small>如果這裡我數字填1不是n，什麼事都不會發生，因為wrap_1的同輩兄弟裡面，第一個是strong，可以實驗看看喔！</small>
+    
+    <strong>範例4-2：是空白，我加了空白</strong>
+    .wrap.wrap_2>iii{iii}*3  CSS設定為.wrap_2 :nth-child(1){background-color:yellow}
+
+    <div class="wrap wrap_2">  
+        <div class="iii">iii</div>
+        <div class="iii">iii</div>
+        <div class="iii">iii</div>
+    </div>
+    發現是第一個iii變色了！因為空了一格，變成抓wrap_2裡的第一個小孩！
+</pre>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Console Tricks!</title>
+</head>
+
+<body>
+
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+    <script>
+        const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+        function makeGreen() {
+            const p = document.querySelector('p');
+            p.style.color = '#BADA55';
+            p.style.fontSize = '50px';
+        }
+
+        // Regular 一般
+
+        console.log('hello')
+
+        // Interpolated 插植 console.log('...%插植 ...','插值插入的內容') %s字串 %d數位數字 %f浮點數字 
+
+        console.log('hello %s !!!', 'world')
+
+        // Styled 變更格式 console.log('%c...','css樣式')
+
+        console.log('%c Are you looking at me?', 'font-size:20px;text-shadow:10px 10px 3px blue;font-family:fantasy;color:grey;font-style:italic;')
+
+        // warning! console.warn('字串') 會出現警告的三角圖示
+
+        console.warn('oops')
+
+        // Error :| console.error('字串') 會出現錯誤的紅色叉叉圖示
+
+        console.error('noooo')
+
+        // Info console.info('字串') 就是平常看到的那樣子
+
+        console.info('tell you a terrible thing...')
+
+        // Testing console.assert(條件,'為假時會console.log出來的字串')
+        const p = document.querySelector('p')
+
+        console.assert(p.classList.contains('what'), 'That is wierd')
+
+        // clearing console.clear() 會清空之前的console
+
+        console.clear()
+
+        // Viewing DOM Elements
+
+        console.dir(p)
+        //可延伸標記式語言（英語：Extensible Markup Language，簡稱：XML）是一種標記式語言。
+        //XML設計是用來傳送和攜帶資料資訊，不用於表現和展示資料，HTML則用來表現資料，所以XML用途的焦點是在於說明資料是什麼以及攜帶資料資訊。
+        //API抓的資料就是XML
+        console.dirxml(p)
+
+        // console.table(p) 這個方法比較好看。
+
+        // Grouping together
+
+        dogs.forEach(dog => {
+            console.groupCollapsed(`${dog.name}`)
+            console.log(`this is ${dog.name}`)
+            console.log(`it is a ${dog.age}-year-old ${dog.name}`)
+            console.groupEnd(`${dog.name}`)
+        });
+
+        // counting console.count('字串') 會自動計算字串的次數
+        console.groupCollapsed('counting')
+        console.count('Wes');
+        console.count('Wes');
+        console.count('Steve');
+        console.count('Steve');
+        console.count('Wes');
+        console.count('Steve');
+        console.count('Wes');
+        console.count('Steve');
+        console.count('Steve');
+        console.count('Steve');
+        console.count('Steve');
+        console.count('Steve');
+        console.groupEnd()
+
+        // timing console.time('計時器名稱') 設置一個計時器 console.timeLog('計時器名稱') 紀錄計時器跑了多久 console.timeEnd('計時器名稱') 結束計時器，並回報時間
+        console.time('try')
+        console.timeLog('try')
+        console.timeEnd('try')
+
+    </script>
+</body>
+
+</html>

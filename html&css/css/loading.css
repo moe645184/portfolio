@@ -1,0 +1,128 @@
+@keyframes right {
+  50%, 100% {
+    left: 100%;
+  }
+}
+@keyframes bottom {
+  50%, 100% {
+    top: 100%;
+  }
+}
+@keyframes left {
+  50%, 100% {
+    right: 100%;
+  }
+}
+@keyframes top {
+  50%, 100% {
+    bottom: 100%;
+  }
+}
+@keyframes loading {
+  0% {
+    width: 102px;
+  }
+  100% {
+    width: 130px;
+  }
+}
+@keyframes box {
+  0%, 100% {
+    background: linear-gradient(white, black);
+  }
+  25% {
+    background: linear-gradient(white, black);
+  }
+  50% {
+    background: linear-gradient(white, black);
+  }
+  75% {
+    background: linear-gradient(white, black);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+}
+
+.box {
+  width: 300px;
+  height: 300px;
+  background-color: rgb(247, 213, 213);
+  margin: auto;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.line1 {
+  background: linear-gradient(to right, transparent, rgb(77, 77, 77));
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  animation: right 2s linear 0s infinite;
+  border-radius: 15px;
+}
+
+.line2 {
+  background: linear-gradient(to bottom, transparent, darkgrey);
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: -100%;
+  animation: bottom 2s linear 0.5s infinite;
+  border-radius: 15px;
+}
+
+.line3 {
+  background: linear-gradient(to left, transparent, white);
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  right: -100%;
+  animation: left 2s linear 1s infinite;
+  border-radius: 15px;
+}
+
+.line4 {
+  background: linear-gradient(to top, transparent, darkgrey);
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  animation: top 2s linear 1.5s infinite;
+  border-radius: 15px;
+}
+
+h1 {
+  margin: 0;
+  border-right: 2px solid black;
+  width: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: loading 1s linear infinite alternate;
+}
+
+.box {
+  animation: box 2s linear infinite;
+}/*# sourceMappingURL=load_hw.css.map */

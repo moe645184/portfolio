@@ -1,0 +1,143 @@
+/*1.階層化抓抓*/
+.box2 .box3 {
+    background-color: blue;
+
+    /*這樣抓就會變成 .box1 .box2 .box3{bgc red了}
+    這層是.box3，父層是.box2，前面又有.box1*/
+    .box1 & {
+        background-color: red;
+    }
+}
+
+/*2.變數*/
+$color1: blue;
+$color2: yellow;
+$color3: green;
+
+.box2_1 {
+    background-color: $color1;
+
+    .box2_2 {
+        background-color: $color2;
+
+        .box2_3 {
+            background-color: $color3;
+        }
+    }
+}
+
+/*3.mixin創造 include呼喚*/
+@mixin box($color: red, $size: 150px) {
+    background-color: $color;
+    width: $size;
+    height: $size;
+}
+
+;
+
+/*直接呼喚，就會直接套用預設值，下面可以再增加樣式*/
+.box3_1 {
+    @include box;
+    overflow: hidden;
+
+    /*也可以修改變數*/
+    .box3_2 {
+        @include box(blue, 100px);
+        margin: auto;
+        margin-top: 25px;
+        overflow: hidden;
+
+        /*樣式的修改也可以直接修改某一個，但要連變數名稱一起*/
+        .box3_3 {
+            @include box($size: 50px);
+            margin: auto;
+            margin-top: 25px;
+        }
+    }
+}
+
+.box {
+    border: solid 2px black;
+    border-radius: 50%
+}
+
+/*4.@extend 繼承*/
+.box4_1 {
+    @extend .box;
+    background-color: red;
+    width: 200px;
+    height: 200px;
+
+    .box4_2 {
+        @extend .box;
+        background-color: blue;
+        height: 150px;
+        width: 150px;
+
+        .box4_3 {
+            @extend .box;
+            background-color: yellow;
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
+
+/*5.%佔位符*/
+%yellow {
+    background-color: yellow;
+    color: blue;
+}
+
+%green {
+    background-color: green;
+    color: red;
+}
+
+%blue {
+    background-color: blue;
+    color: orange;
+}
+
+.box5_1 {
+    width: 200px;
+    height: 200px;
+    @extend %yellow;
+
+    .box5_2 {
+        width: 150px;
+        height: 150px;
+        @extend %green;
+
+        .box5_3 {
+            width: 100px;
+            height: 100px;
+            @extend %blue;
+        }
+    }
+}
+
+//6.#{}插值
+//設定變數
+$item: (
+    margin,
+    padding
+);
+
+//使用mixin設定變數
+@mixin function($side, $value) {
+
+    //@each是表示 在$item裡面的每一個變數(然後這個集合我叫它$target)
+    @each $target in $item {
+        //最後就是組合時間：$target-$side  $target是上面$item裡面的margin跟padding，$side是由@mixin創造的模組，等等我們要用@include去呼喚它
+        #{$target}-#{$side}: $value;
+    }
+}
+
+.box6_1 {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+    //這邊呼喚@mixin的模組，$side=left，value=100px，組合起來就會是margin-left:100px;跟padding-left:100px;
+    @include function(left, 100px);
+}

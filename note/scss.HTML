@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/scss.css">
+</head>
+<body>
+  
+</body>
+1.階層抓抓：&
+<div class="box1">
+  <div class="box2">
+    <div class="box3">&表示連接父層</div>
+  </div>
+</div>
+<hr>
+2.變數設定：$
+<div class="box2_1">$color1
+  <div class="box2_2">$color2
+    <div class="box2_3">$color3</div>
+  </div>
+</div>
+<hr>
+3.@mixin模組的創造：@include的呼喚
+<div class="box3_1">
+  <div class="box3_2">
+    <div class="box3_3"></div>
+  </div>
+</div>
+<hr>
+4.@extend 繼承寫好的同一樣式</br>
+我先寫好.box然後直接繼承.box的radis跟border
+<div class="box4_1">
+  <div class="box4_2">
+    <div class="box4_3"></div>
+  </div>
+</div>
+<hr>
+5.%%%佔位符：% 用@extend呼喚% 
+主要是編碼時，只會出現有吃到的部分，如果有被吃掉的就不會顯示出來！(CSS編出來會很乾淨)
+<div class="box5_1">123
+  <div class="box5_2">321
+    <div class="box5_3">1234567</div>
+  </div>
+</div>
+<hr>
+6.插值：#{} @mixin與@include以及@each的大亂鬥</br>
+我不知道這到底要用在哪裡，但學起來就對了。</BR>
+用SCSS編成CSS會直接計算，但如果使用插值就不會直接計算</BR>ex.50/2 如果不是用插值會直接變成25。
+<div class="box6_1"></div>

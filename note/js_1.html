@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        1.HTML5 ：廣義論及HTML5時，實際指的是包括HTML、CSS和JavaScript在內的一套技術組合。它希望能夠減少網頁瀏覽器對於需要外掛程式的豐富性網路應用服務。
+                                                                                                                    (By wikipedia : https://zh.wikipedia.org/wiki/HTML5)
+        2.為什麼要用js？主要用來向HTML頁面添加互動行為
+        3.JavaScript常用來完成以下任務：
+          3-1嵌入動態文字於HTML頁面；
+          3-2對瀏覽器事件作出回應；
+          3-3讀寫HTML元素；
+          3-4在資料被提交到伺服器之前驗證資料；
+          3-5檢測訪客的瀏覽器資訊；
+          3-6控制Cookie，包括建立和修改等；
+                                     (By wikipedia : https://zh.wikipedia.org/wiki/JavaScript#%E6%A6%82%E8%AB%96)
+        4.js三步驟
+            4-1.何者(who):抓取作用對象
+                4-1-1 方法一： document.querySelector('名稱')
+                        對文件尋求選擇器。因此後面需要接字串，字串內容為css中的名稱。*注意，如果是抓class，此方法只會抓第一個就回報，所以之後的class都不會作用喔！
+                            (想像有人請你找東西，你找到一個就會直接回報，不會沒事全部都找出來，有找到就好)
+                            如class="box"，表示為document.querySelector('.box')
+                            而id="box"，則表示為document.querySelector('#box')
+                4-1-2 方法二：抓Id document.getElementById('box') 抓Class document.getElementByClassName('box') 抓Tag document.getElementsByTagName('div') *注意class跟tag都不會只有一個，所以element要加上s！
+                        這個方式抓取的class跟tag結果跟querySelector的結果會不同！他會把全部都抓下來，所以結果會是陣列。要抓陣列的東西必須要再加上[]，才會抓到裡面的class跟tag喔！不然你就只是對整個陣列下指令而已！
+                            如document.getElementsByTagName('div')[0] 這樣才會抓到第一個div
+                            如果是document.getElementById('box')就不會有這個問題。因為id是唯一的。
+                4-1-3 設定變數：var let const
+                        var:全區域都會作用，且可以重複宣告  
+                        let:只有在let所在的括號範圍內作用(包含在let範圍內的括號都會作用)  
+                        const:宣告一個常數(看const宣告後，就不能再賦與其他的值)，只有在const所在的括號範圍內作用(包含在const以內的括號都會作用) 
+                            a.{var a = 1 } 
+                              console.log(a) => 1
+                            a-1.{var a = 1}
+                                {var a = 2}
+                                console.log(a) => 2
+                            b.{let a = 1 } 
+                              console.log(a) => not defined
+                            c.{const a = 1 } 
+                              console.log(a) => not defined
+                            c-1.const a = 1 
+                                a = 2  
+                                console.log(a) => Assignment to constant variable.(錯誤內容：指派給一個常數)
+                                                                                                可以參考：https://www.programfarmer.com/articles/javaScript/javascript-var-let-const-for-loop
+                        為什麼要設定變數？這樣才不用打到死啊！
+                            假設我要抓class是box的div，我必須打：document.querySelector('.box')，然後我想要抓裡面的classList，我就必須打document.querySelector('.box').classList。如果我又想抓別的，我又要再打一次一長串。
+                            此時，我設定變數： var box = document.querySelector('.box') 我要抓classList，只要打 box.ClassLit ！舒服！這裡設定變數不是必要，但為了你的手指眼睛著想，設定一下會舒服許多。
+            4-2.何時(when)
+                        恩對，就是你要什麼時候讓他觸發，例如：點擊、滑鼠移過去、滑鼠移出去……
+            4-3.何事(what)
+                        恩對，就是你要讓他幹嘛，例如：滑鼠點到的時候，我背景要變色、滑鼠移過去的時候我要顯示你滑過我了……
+            4-4.總結：我沒有敷衍4-2、4-3。 忘記怎麼寫？爬文就對了!!!!!不知道怎麼下指令？爬文就對了!!!!!重點是：要會找關鍵字！知道你要程式做什麼！
+                        box.onclick = function () {動作}   onclick表示何時 {動作}表示做什麼 *function()的()不可以省略，功能等老師講。
+    </pre>
+</body>
+</html>

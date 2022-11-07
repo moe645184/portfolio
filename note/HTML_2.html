@@ -1,0 +1,162 @@
+<pre>
+一、表格
+
+    table 表格 (記得要設border)
+    caption 表頭標題
+    thead 表頭- tbody 主體內容- tfoot 頁尾
+    tr 表格列(able row)
+    th 表格標題(table heading) - td 表格資料(table data)
+    <table border="1px">
+        <caption>表單名稱</caption>
+        <thead>
+            <tr>
+                <th>表頭1</th>
+                <th>表頭2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>內容1</td>
+                <td>內容2</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>頁尾1</td>
+                <td>頁尾2</td>
+            </tr>
+        </tfoot>
+    </table>
+    合併儲存格
+    colspan="數字" 橫的合併 column + span
+    rowspan="數字" 直的合併 row + span
+    *thead tbody tfoot不能跨區合併
+    <table border="1px">
+        <thead>
+            <tr>
+                <th colspan="2">colspan="2"</th>
+                <th>第三格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2">rowspan="2"</td>
+                <td>第二格</td>
+                <td>第三格</td>
+            </tr>
+            <tr>
+                <td>第二格</td>
+                <td>第三格</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td>一格</td>
+            <td>一格</td>
+            <td>一格</td>
+        </tfoot>
+    </table>
+
+二、表單
+
+    form
+    lebel →標籤，點擊可以自動focus對應的標籤
+    input →type:text、password、email、tel、url、file、search、date、time、color、range、checkbox、submit、reset、button
+    textarea →多行文字
+<form>
+    <label>帳號</label>
+    <input type="text">
+    <label>密碼</label>
+    <input type="text">
+
+    label 寫法：
+
+    <label for="account">1.用for抓id</label>
+    <input type="text" id="account">
+
+    <label>2.直接把東西放到label裡面
+    <input type="text"></label>
+
+    各類型input *input是inline，我這邊會自動分開是因為我寫在pre裡面。
+
+    <label>type="mail"
+    <input type="mail">
+    </label>
+
+    <label>type="tel"
+    <input type="tel">
+    </label>
+
+    <label>type="number"時input可設定min跟max，但直接輸入還是可以突破上下限
+    <input type="number" min="18" max="25">
+    </label>
+
+    <label>type="url"
+    <input type="url">
+    </label>
+
+    <label>type="file"
+    <input type="file">
+    </label>
+
+    <label>type="search"
+    <input type="search">
+    </label>
+
+    <label>type="date"
+    <input type="date">
+    </label>
+
+    <label>type="time"
+    <input type="time">
+    </label>
+
+    <label>type="color"
+    <input type="color">
+    </label>
+
+    <label>type="range"
+    <input type="range">
+    </label>
+
+   type="checkbox" 注意label位置改變
+   <label><input type="checkbox">吃飯</label>
+   <label><input type="checkbox">洗澡</label>
+   <label><input type="checkbox">睡覺</label>
+
+   type="radio" 記得設定name 才會知道是同一個問題
+   <label><input type="radio" name="wanna">吃飯</label>
+   <label><input type="radio" name="wanna">洗澡</label>
+   <label><input type="radio" name="wanna">睡覺</label>
+
+   <label>type="submit"
+   <input type="submit">
+   </label>
+
+   <label>type="reset"
+   <input type="reset">
+   </label>
+
+   <label>type="button"
+   <input type="button">
+   </label>
+
+   <textarea name="" id="" cols="30" rows="10">textarea</textarea>
+
+</form>
+三、video影片 audio音訊 sourse來源
+
+   <video controls width="250">
+    <source src="https://www.youtube.com/watch?v=qRHoSWpkbBo&list=PLqivELodHt3iF_Spzdz_6LsOSPOyfDx-R&index=4&ab_channel=CSScoke">
+    <source src="https://www.youtube.com/watch?v=kn6_RH1t7_I&ab_channel=RainieYang%27sOfficialChannel%E6%A5%8A%E4%B8%9E%E7%90%B3%E5%AE%98%E6%96%B9%E5%B0%88%E5%B1%AC%E9%A0%BB%E9%81%93">
+    <p>網頁不支援video功能</p>
+   </video>
+   寫source可以在找不到來源時，自動往下找。audio用法同video。
+
+四、VS CODE快捷鍵
+
+    shift + tab = 減少縮排
+    tab = 增加縮排
+
+    ctrl + D 選取相同字串，按下左右的方向鍵後就可以一起編輯了
+    shift + 方向鍵 鍵盤選取
+</pre>

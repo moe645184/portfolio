@@ -1,0 +1,143 @@
+<style>
+    pre{
+        font-family:'微軟正黑體';
+    }
+</style>
+
+<pre>
+    前端：畫面與資料呈現 HTML + CSS +JS
+    後端：資料的處理與儲存 PHP + MySQL (最大宗，老師公司使用：Laravel的框架) / ASP .NET + ms SQL / Java + Oracle
+    MVC架構：模型(model) 視圖 控制器
+    controller 處理邏輯(店員：處理請求) 
+    model 處理後端(師傅：處理資料DB) 
+    view 處理畫面(經理：呈現畫面)
+
+                --request--→ 
+      手機/電腦              資料(apache /nginx)
+                ←-response--
+
+    <img src="./backend.png" alt="後端流程圖片">
+
+laravel 建立專案流程：
+    1.打開laravel 的頁面，找到Your First Laravel Project ，把裡面的 composer create-project laravel/laravel example-app 複製貼上到終端機。
+        *記得先cd到要建立資料夾的位置
+        *example-app可以自己命名檔案名稱
+    2.建立好了之後，打開vs code開啟資料夾。ctrl + ` 開啟VS code的終端機，輸入 php artisan serve ，會出現[http://...] ，ctrl + 左鍵點擊網址 就會前往該頁面
+        *如果出現laravel的頁面即成功。但若拒絕連線，可能是按到ctrl + C 強制關閉連接囉。此時，需要重新輸入指令。 
+
+    route ： 在route > web.php 中
+    controller：: 在app >http > controllers
+    view：在resource > view
+
+操作流程：
+    1.在Controller建立function (詳情請見Controller.php的頁面)
+        *function的定義跟js一樣，只是要加上public
+        例子： public function index(){
+                dd('Hello World');  --→等於js的console.log
+                }
+            這樣就建立了一個index的function了。接著我們要讓請求過來時，讓路由器導去呼叫這個function
+    2.在web.php讓路由器導去controller
+        首先要讓路由器知道要用哪個controller 在web.php前面那裏加上use App\Http\Controllers\Controller;
+        這樣就可以使用預設的controller了
+        接著，在讓Route知道要讓請求導去哪裡 Route::請求方法("路徑(網址)", 該做的事情/該去的地方);
+        例子： Route::get('/',[Controller::class,'index']);
+            這樣他就會在首頁時，使用Controller中的index這個function
+        如果是要換到view則function寫 return view('檔案名稱'); *view的副檔名為.blade.php
+
+如何在同樣view的狀況下，不同分頁產生不同的內容？
+    1.根據不同的頁面，controller給予不同的資料(較正確)
+        1-1在view中使用{{$msg}}
+            正式的寫法：<?php echo $msg ?>
+        1-2在控制器定義 publicfunction index(){
+            $msg = '歡迎來到首頁!!'
+            $title = '謝謝再次光臨!!'
+            return view('welcome',compact('msg','title'))
+            }
+        1-3在Web.php 呼叫finction   
+    
+    2.頁面本身直接根據網址做出判斷顯示不同資料
+        2-1在view寫if判斷
+            @if(str_contains(Route::current()->uri,'mypage'))
+                這是這人頁面
+            @else
+                這是首頁
+            @endif
+
+        2-2也可以寫成這樣子
+            {{ str_contains(Route::current()->uri,'mypage') ? '這是個人頁面','這是首頁'}}
+            這串的意思是：當前的路由裡的uri的字串是否包含mypage  是的話就回報'這是個人頁面'，否則就回報'這是首頁'
+    
+    3.如何把自己做的HTML丟到專案？
+        3-1把HTML丟到views
+        3-2把圖片、CSS、JS等等丟到public
+        3-3寫路由跟控制器，改主頁的連結到該路徑(寫路由時會定義你要的網址)
+
+    4.製作會員中心
+        4-1先到 https://laravel.com/docs/9.x/starter-kits 會找到  composer require laravel/breeze --dev 在終端機執行
+        4-2執行XAMPP打開My SQL 的start按鈕
+        4-3打開 HeidiSQL 點選新增，後來確認埠口正確後建立，再右鍵新增資料庫。
+        4-4回到VS code的專案中的vender裡的.env 找到deta_base改成剛剛資料庫設定的名稱 (記得如果有改埠口的也要改對應的埠口)，完成後你就會看到這個資料庫有東西跑進去了~
+        4-5回到 https://laravel.com/docs/9.x/starter-kits 找後下面的四行個別執行 php artisan breeze:install  / php artisan migrate  / npm install / npm run dev
+        4-6再打 php artisan serve 到終端機，打開網址，確認右上方有登入跟註冊
+        4-7試著註冊，完成後，打開HeidiSQL的資料庫，找到users，點選資料，查看內容就會發現剛剛註冊的資料出現了!
+
+    5.建立自己的頁面
+        5-1在views增加 frontend資料夾，把HTML丟進去
+        5-2在public中丟入CSS img js之類的檔案。 將連接css的連接改成{{asset(css/weather.css)}} 比較確保不會打架(public中的資料用asset抓)
+        5-3建立新的contorller 指令：php artisan make:controller FrontController。讓controller return view(frontend裡的檔案)
+        5-4去route建立路徑並呼叫這些controller ，這樣到這些路徑就會有畫面了！
+        5-5也可以在blade.php裡面去寫a標籤連結到這些頁面
+
+    6.建立資料表
+        6-1直接在後端資料庫建立新資料庫(絕對錯誤!!!!)
+        6-2去database ->migrations 打開終端機 輸入 php artisan make:migration create_products_table 這樣就可以建立出有日期的資料庫(名稱會複數)
+            *記得如果打錯字什麼的，要直接刪除，重新輸入指令，不能改名字。
+        6-3看到有新增的檔案進入，在function up 的 $table->id(); $table->timestamps(); 之後開始輸入，這兩個不能動！
+            *輸入什麼可以參考別的已建立的資料庫，圖片、文字等等都是字串!
+            *可以用->輸入nullable() 表示資料可以為空值 ->comment('輸入附註')。
+        6-4打開終端機輸入 php artisan migrate，新增表格。回到HeidiSQL 重新整理，確認已新增。
+
+    7.資料的存取
+        7-1建立model 終端機php artisan make:model Product (名稱會單數)，然後複製
+            protected $fillable = [
+            'name',
+            'email',
+            'password',
+            ];
+            把字串改成自己放的東西。(但可以用更方便的東西。)
+        7-2終端機輸入 composer require krlove/eloquent-model-generator --dev
+        7-3到config的app.php找到providers[...]貼上 Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        7-4終端機輸入 php artisan krlove:generate:model User
+            *記得User一定要改別的名稱，不然會蓋掉原本的User.php，會壞掉。
+            *User 會抓database的檔案名稱。(所以model 跟 database的名稱要照規定寫，如果抓不到可以在後面加上 --table-name=名稱 直接抓)
+        7-5回到controller 將資料庫的資料用get()取得資料的陣列，並return到view，就可以開始到view挖洞抓資料了
+
+    8.資料庫增加欄位
+        8-1資料庫新增欄位:php artisan make:migration add_"name"_to_"target" ，接著就從6-3的步驟開始，就會看到新增的欄位。
+        8-2資料庫新增後，記得model的fillable也要增加那個欄位!
+
+    9.資料的增加
+        9-1做出一個form表單，使用兩個屬性：action到要為儲存資料的頁面(通常叫store)的路徑，method="post"
+            *記得在form表單裡面埋@csrf，不然會出現419報錯 *csre = Cross Site Request Forgery，跨站請求偽造
+        9-2使用路由創造出這個store路徑
+        9-3去controller寫路由呼叫的store function
+
+                public function store(Request $request){
+                    Product::create([
+                        '資料名稱1' => $request->資料名稱1,
+                        '資料名稱2' => $request->資料名稱2,
+                        '資料名稱3' => $request->資料名稱3,
+                    ]);
+    
+                    return redirect('要返回的頁面');
+                }
+            }
+            *記得要用redirect回去頁面，不然重新整理頁面就會一直新增同樣的資料
+
+    10.github抓下來的專案
+        10-1 npm install
+        10-2 composer install
+        10-3 複製.env.example，改成.env 並把內容改成你要的資料庫 輸入php artisan key:gen
+        10-4 開啟XAMPP 並且輸入php artisan migration
+
+</pre> 

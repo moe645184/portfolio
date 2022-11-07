@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+
+<style>
+
+  html,
+  body {
+    margin: 0;
+  }
+
+</style>
+
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw')
+    //渲染環境為2d
+    //透過 CanvasRenderingContext2D 來操作 Canvas 的 Context，記得不是操作它的 DOM！
+    const ctx = canvas.getContext('2d');
+    //整個視窗都是你的畫布
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    //你的畫筆畫出來的頭、轉彎處都是圓圓Der，寬度100px
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 100;
+    //如果顏色重疊要怎麼顯示
+    // ctx.globalCompositeOperation = 'multiply';
+    //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lasY = 0;
+    //色調
+    let hue = 0;
+    let direction = true;
+
+    //開始畫畫囉
+    function draw(e) {
+      //如果不是為真就結束(只有按下滑鼠時會為真)
+      if (!isDrawing)return;
+      //canvas是用HSL色環來設定顏色寫法：hsl（顏色、飽和度、明亮度） 顏色：最多360(色環嘛)
+      ctx.strokeStyle = `hsl(${hue},100%,50%)`
+      //創造路徑囉
+      ctx.beginPath();
+      //設置起始點
+      ctx.moveTo(lastX, lastY);
+      //設置終點(這個是事件的x及y偏移量)
+      ctx.lineTo(e.offsetX, e.offsetY);
+      //顯現出來吧!!
+      ctx.stroke();
+      //讓起始位置變成前一個的結束位置
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+
+
+      //變色囉!
+      hue++;
+      if (hue >= 360) {
+        hue = 0;
+      }
+
+      //線的粗細變化：如果大於100px或小於1px，則direction就false 
+      if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+      }
+
+      //如果direction為真，就會持續長大+1，不然就持續變小-1
+      if (direction) {
+        ctx.lineWidth++;
+      } else {
+        ctx.lineWidth--;
+      }
+    }
+
+    //當滑鼠按下時，isDrawing為真，起始位置會是點及的位置
+    //這裡並不觸發draw(e)，只是function(e)
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+
+    //滑鼠的移動直接執行function，因為只有點擊時會為真，其他時候為假，直接終止。
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
+
+  </script>
+
+</body>
+
+</html>

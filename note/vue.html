@@ -1,0 +1,208 @@
+<pre style="font-family:'微軟正黑體' ;">
+    Vue 3
+    
+    1.指令式渲染 VS 宣告式渲染
+        1-1前者：指令驅動元素 例如：監聽事件，必須要有監聽的事件發生才會改變你要改變的元素!!
+        1-2後者：想想後端blade {{變數}} 只要改變變數，就會改變值
+        1-3 VUE是MVVM modle  modle view view-modle (想想後端MVC)
+            a. view = DOM
+            b. ViewModel = Vue (綁定元素跟JS變數)
+            c. model = Plain JS Object (JS變數)
+    
+    2.建立Vue物件
+        2-0 cdn放在script之前(外面會直接安裝npm) =>這串：< script src="https://unpkg.com/vue@3/dist/vue.global.js">< /script>
+        2-1 JS做宣告
+            const 變數 = Vue.createApp({
+                //data 宣告整個Vue實體中，會用到的所有變數的地方(初始值可以是空值，但就是要設定)
+                data(){
+                    return{
+                        變數1:'內容',
+                        變數2:'',
+                        變數3: null,
+                    }
+                }
+            })
+    
+            變數.mount('#app')   *#app表示抓id=app的區塊
+    
+        2-2 HTML寫要使用的地方
+            < div id="app">
+                //這個區塊就被mount了一個Vue實體，所以可以使用變數裡面的東西
+                < p>我要使用{{變數1}}< /p>
+                < p>我要做出{{變數2}}< /p>
+                < p>最後變成{{變數3}}< /p>
+            < /div>
+        
+    
+    3. templete 模組
+        3-1 寫成模組後，只要mount在需要的地方，就會出現囉!
+        const 變數 = Vue.createApp({
+            data(){
+                return{
+                    變數1:'內容',
+                    變數2:'',
+                    變數3: null,
+                }
+            },
+
+            //此實體會附上的HTML元入，可當作樣板字串使用
+            template:`
+                < p>我要使用{{變數1}}< /p>
+                < p>我要做出{{變數2}}< /p>
+                < p>最後變成{{變數3}}< /p>
+            `
+        })
+
+        變數.mount('#app')
+
+    4.function 函數
+        4-0 computed vs method ：前者只會執行一次之後，有值就回傳了，之後就不會再從頭執行。(很少用到)
+        4-1
+        const 變數 = Vue.createApp({
+            data(){
+                return{
+                    變數1:'內容',
+                    變數2:'',
+                    變數3: null,
+                }
+            },
+
+            //此實體會附上的HTML元入，可當作樣板字串使用
+            template:`
+                < p>我要使用{{變數1}}< /p>
+                < p>我要做出{{變數2}}< /p>
+                < p>最後變成{{函式名稱}}< /p>
+                {{函式名稱2()}}
+            `,
+            methods:{
+                函式名稱:function(){
+                    return this.變數3 * 1
+                },
+                函式名稱2:function(){
+                    return this.變數2
+                }
+            }
+        })
+
+        變數.mount('#app')
+
+    5. v-bind 綁屬性
+        5-1寫法： v-bind:屬性=""  *字串放的就跟寫行內的時候一樣 *可減寫成 :屬性=""
+            const vm = Vue.createApp({
+                data() {
+                    return {
+                        message: 'Hello Vue !',
+                        age:'13',
+                    }
+                },
+                template:`
+                < h1 v-bind:style="color">{{ message }}< /h1>
+                < input type="text" v-bind:value="age">
+                `
+            })
+            vm.mount('#demo')
+        5-2變數： v-bind:屬性="變數" *如果放非數字會自動當成要抓變數，因此如果只是要文字則需要再加一個''表示字串
+
+    6. v-model 表單綁定 會自動綁input的value
+        6-1:寫法：v-model="變數"
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    age:'13',
+                    go:'選擇上面的內容'
+                }
+            },
+            template:`
+            < input type="radio" name="try" value="早安" v-model="go">
+            < input type="radio" name="try" value="午安" v-model="go">
+            < input type="radio" name="try" value="晚安" v-model="go">
+            < input type="radio" name="try" value="早上安" v-model="go">
+            < input type="radio" name="try" value="晚上安" v-model="go">
+            < h1>{{ go }}< /h1>
+            `
+        })
+        vm.mount('#demo')
+    
+    7. v-on 綁定事件囉
+        7-1 v-on:[事件名稱]="函式名稱" *可以簡寫成@[事件名稱]="函式名稱" *預設變數$event，可不寫，可以用event變數抓到event
+
+    8.各種炫炮的語法 *以下事件並非絕對，可以自行更換搭配
+        @click.stop 等於 onclick=event.stopPropagation() 阻止冒泡!!!(祖宗層的妖魔鬼怪退散，例如父子層都有的點擊事件)
+        @click.prevent 等於 onclick=event.preventDefault() 阻止預設!!!(例如a連結的click事件，就不會點擊後跳轉)
+        @click.capture 可以改變父子層的冒泡執行順序
+        @click.self 只有點到自己本身才可以執行，子層父層都沒作用!!
+        @event.key 可以抓到使用的按鍵
+        @keydown.enter.exact 可以限定使用的鍵盤按鍵
+        @click.right/middle/left 可以偵測使用的滑鼠按鍵
+    
+    9.v-if  v-show
+        9-1 v-if="條件" 當滿足條件的時候才會出現，如果不滿足條件 v-if會讓元素消失，v-show則是會讓元素display:none
+            < div v-if="move == 1">
+                < label for="">那東西該動嗎</label>
+                < input type="radio" value="1" name="fav" v-model="should_move">該動
+                < input type="radio" value="2" name="fav" v-model="should_move">不該
+                < input type="radio" value="3" name="fav" v-model="should_move">窩不知道
+            < /div>
+
+            這種狀況下，只有move = 1時，這個div才會出現，否則就會整塊消失，F12也看不到!!!!
+
+            也可以使用function return值來達到if的條件
+            < p v-if="result() == 1">問題解決< /p>
+            result() { 
+                if(this.move == 1 && this.should_move == 1 || this.move == 2 && this.should_move == 2){
+                    result = 1
+                }else if(this.move == 2 && this.should_move == 1){
+                    result = 2
+                }else if(this.move == 1 && this.should_move == 2){
+                    result = 3
+                }else if(this.should_move == 3){
+                    result = 4
+                }else{
+                    result = ""
+                }
+                return result
+            }
+
+    10.v-for
+        10-1 v-for="每項 in 陣列/物件"
+        10-2 先在data定義出陣列，在將v-for寫在
+            data() {
+                return {
+                    陣列:[...]
+                }
+            }
+
+            data() {
+                return {
+                    物件:[...]
+                }
+            }
+
+            v-for=(item,index) in 陣列，index可以抓到物件的序數(從0開始)
+            v-for=(item,index) in 物件，index可以抓到物件的名稱
+        
+        10-3 如果是有很多項，則可以使用像天氣api的方法，讓陣列裡面放物件們
+
+    11.vue CLI 安裝
+        11-1 安裝node.js
+        11-2 PowerShell執行npm install -g @vue/cli *完成後輸入vue，如果發現有錯誤訊息，再以執行管理員身分執行 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+        11-3 接著執行 vue create [專案名稱]  *如果上一步有重開過PowerShell記得要重新cd一次!!!!!!不然會裝到system32裡面!!!!!!!最後還是要重裝喔。
+        11-4 接著開始選擇題，Manually select features -> Babel 跟 Router 跟 Vuex 跟 CSS Pre-processors 跟 Linter / Formatter 用空白鍵複選，好了再按enter
+            ->In dedicated config files ->輸入N ->開始跑安裝囉 *這個是課堂安裝的選擇，之後要依照實際需求選擇喔
+        11-5 打開vs code 打開該資料夾
+        11-6 終端機輸入 npm run serve 就可以連到網頁囉!
+
+    12.vue CLI 使用
+        12-1命名：不管什麼都是大駝峰命名。
+        12-2資料夾：
+            a.src > components: 可以建立元件 // router: 用index.js建立路徑 // views: 建立頁面
+        12-3 views
+            a.使用templete打html的內容
+            b.使用stylelang可以在lang選擇SCSS或者CSS的寫法
+            c.
+
+
+    *.可以安裝套件： vue  / vue-language  / vue-snippet
+
+
+</pre>

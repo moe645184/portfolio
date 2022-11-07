@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hold Shift to Check Multiple Checkboxes</title>
+</head>
+
+<body>
+    <style>
+        html {
+            font-family: sans-serif;
+            background: #ffc600;
+        }
+
+        .inbox {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #F1F1F1;
+        }
+
+        .item:last-child {
+            border-bottom: 0;
+        }
+
+        input:checked+p {
+            background: #F9F9F9;
+            text-decoration: line-through;
+        }
+
+        input[type="checkbox"] {
+            margin: 20px;
+        }
+
+        p {
+            margin: 0;
+            padding: 20px;
+            transition: background 0.2s;
+            flex: 1;
+            font-family: 'helvetica neue';
+            font-size: 20px;
+            font-weight: 200;
+            border-left: 1px solid #D1E2FF;
+        }
+    </style>
+    <!--
+   The following is a common layout you would see in an email client.
+   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+  -->
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>This is an inbox layout.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Check one item</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Hold down your Shift key</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Check a lower item</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Everything in between should also be set to checked</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Try to do it without any libraries</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Just regular JavaScript</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Good Luck!</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Don't forget to tweet your result!</p>
+        </div>
+    </div>
+
+    <script>
+        //目標：當我使用shift +左鍵點擊checkbox時 可以從之前打勾的部分到目前點擊的地方都check起來，或直接左鍵+shift可以打勾目前位置到最後
+        //step1:把全部的checkbox選起來
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]')
+        let lastchecked
+
+        //step2：寫下要做的事情的函式：1.直接shift + 左鍵，會從這個box直接勾到最後一個 2.先左鍵點擊一個後才shift+左鍵另一個，會將這之間都check起來
+        // e -->event
+        function handlecheck(e) {
+            // console.log(e)
+            console.log(this)
+
+            let inBetween = false
+            //2-1先判斷是不是有點擊左鍵+shift
+            if (e.shiftKey && this.checked) {
+                //如果是的話，把第一個打勾的跟這一個裡面的全部打勾勾，或者這之後的要全部打勾
+                //2-2 對每個檢查，如果它是第一個或者是最後一個，我們就讓它的inBetween 相反
+                //(如果為真，我們就讓checkbox打勾。如此一來，如果是有第一個的就會勾到最後一個關掉。如果沒有第一個的，就會它之後全部都打勾)
+                //2-2-1 對每個檢查是否為第一個或者最後一個
+                checkboxes.forEach(checkbox => {
+                    if (checkbox === this || checkbox === lastchecked) {
+                        inBetween = !inBetween 
+                    }
+                    //如果inBetween為真，checkbox就會打勾
+                    if (inBetween) {
+                        checkbox.checked = true
+                    }
+                })
+            }
+            //如果不是左鍵+shift的狀況，只是左鍵而已。那就讓lastchecked等於它。
+            lastchecked = this
+        }
+
+        //最後再綁定事件~完成
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handlecheck))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,735 @@
+* {
+  padding: 0;
+  margin: 0;
+  background-size: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+@keyframes shinny {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 0px) scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(5px, 5px) scale(1);
+  }
+}
+@keyframes bligbling {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.1);
+    background-color: rgb(125, 255, 255);
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translate(0, 500px);
+    background-color: rgb(60, 255, 255);
+  }
+}
+.night {
+  width: 100%;
+  height: 100vh;
+  background-image: url(https://media.istockphoto.com/photos/glass-window-with-glowing-crowded-city-picture-id1127251935?k=20&m=1127251935&s=612x612&w=0&h=rWX9ZcZQQpIVfU3JBsn0TPURdQd2IlWleLH-zEEVSzs=);
+  background-size: cover;
+  overflow: hidden;
+}
+.night .sparkle {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.night .sparkle .sparkle1 {
+  border-radius: 50%;
+  height: 4.814854474px;
+  width: 4.814854474px;
+  position: absolute;
+  top: 56.1046673217%;
+  left: 83.6298387521%;
+  background: linear-gradient(to top, rgb(20, 39, 221), rgb(12, 255, 255));
+  filter: blur(0.1024487372px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 2.6336175963s;
+}
+.night .sparkle .sparkle2 {
+  border-radius: 50%;
+  height: 1.5424247717px;
+  width: 1.5424247717px;
+  position: absolute;
+  top: 10.9406261385%;
+  left: 66.8247794854%;
+  background: linear-gradient(to top, rgb(84, 31, 16), rgb(133, 255, 255));
+  filter: blur(3.6297947815px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 7.5373269704s;
+}
+.night .sparkle .sparkle3 {
+  border-radius: 50%;
+  height: 5.8183333296px;
+  width: 5.8183333296px;
+  position: absolute;
+  top: 29.6465476165%;
+  left: 50.1393213192%;
+  background: linear-gradient(to top, rgb(49, 248, 51), rgb(102, 255, 255));
+  filter: blur(4.9419099461px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 7.0873761634s;
+}
+.night .sparkle .sparkle4 {
+  border-radius: 50%;
+  height: 7.0716196111px;
+  width: 7.0716196111px;
+  position: absolute;
+  top: 20.2087233747%;
+  left: 66.832214995%;
+  background: linear-gradient(to top, rgb(190, 158, 248), rgb(55, 255, 255));
+  filter: blur(4.0287126921px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 2.2928974338s;
+}
+.night .sparkle .sparkle5 {
+  border-radius: 50%;
+  height: 2.2414628289px;
+  width: 2.2414628289px;
+  position: absolute;
+  top: 49.7890474136%;
+  left: 43.6429815148%;
+  background: linear-gradient(to top, rgb(148, 209, 100), rgb(24, 255, 255));
+  filter: blur(3.2462081499px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 1.258069532s;
+}
+.night .sparkle .sparkle6 {
+  border-radius: 50%;
+  height: 3.7618187006px;
+  width: 3.7618187006px;
+  position: absolute;
+  top: 70.5449437559%;
+  left: 60.8608632654%;
+  background: linear-gradient(to top, rgb(55, 27, 218), rgb(133, 255, 255));
+  filter: blur(3.537776065px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 9.4595878183s;
+}
+.night .sparkle .sparkle7 {
+  border-radius: 50%;
+  height: 6.3990540344px;
+  width: 6.3990540344px;
+  position: absolute;
+  top: 79.5369259045%;
+  left: 76.1971426105%;
+  background: linear-gradient(to top, rgb(87, 122, 55), rgb(4, 255, 255));
+  filter: blur(3.9158018886px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 6.2409568545s;
+}
+.night .sparkle .sparkle8 {
+  border-radius: 50%;
+  height: 8.4622737445px;
+  width: 8.4622737445px;
+  position: absolute;
+  top: 35.1880891461%;
+  left: 10.2089399664%;
+  background: linear-gradient(to top, rgb(100, 118, 73), rgb(42, 255, 255));
+  filter: blur(1.0781727888px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 8.541337702s;
+}
+.night .sparkle .sparkle9 {
+  border-radius: 50%;
+  height: 0.0390023089px;
+  width: 0.0390023089px;
+  position: absolute;
+  top: 12.6449095562%;
+  left: 33.2925039466%;
+  background: linear-gradient(to top, rgb(66, 102, 198), rgb(69, 255, 255));
+  filter: blur(1.3353478917px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 5.5207146599s;
+}
+.night .sparkle .sparkle10 {
+  border-radius: 50%;
+  height: 8.435516953px;
+  width: 8.435516953px;
+  position: absolute;
+  top: 54.1498421841%;
+  left: 23.8031458837%;
+  background: linear-gradient(to top, rgb(116, 179, 28), rgb(179, 255, 255));
+  filter: blur(1.2315758213px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 0.4152756871s;
+}
+.night .sparkle .sparkle11 {
+  border-radius: 50%;
+  height: 2.7281669262px;
+  width: 2.7281669262px;
+  position: absolute;
+  top: 71.8182307893%;
+  left: 92.0153790161%;
+  background: linear-gradient(to top, rgb(25, 219, 4), rgb(13, 255, 255));
+  filter: blur(4.2729202377px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 0.8744566064s;
+}
+.night .sparkle .sparkle12 {
+  border-radius: 50%;
+  height: 5.8089614019px;
+  width: 5.8089614019px;
+  position: absolute;
+  top: 39.7562969132%;
+  left: 8.2100871808%;
+  background: linear-gradient(to top, rgb(221, 18, 16), rgb(154, 255, 255));
+  filter: blur(1.1452974192px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 9.8861221751s;
+}
+.night .sparkle .sparkle13 {
+  border-radius: 50%;
+  height: 8.614648653px;
+  width: 8.614648653px;
+  position: absolute;
+  top: 45.1615312404%;
+  left: 23.1873504514%;
+  background: linear-gradient(to top, rgb(78, 37, 123), rgb(170, 255, 255));
+  filter: blur(1.5813220426px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 0.7903871482s;
+}
+.night .sparkle .sparkle14 {
+  border-radius: 50%;
+  height: 5.9770709073px;
+  width: 5.9770709073px;
+  position: absolute;
+  top: 56.120712346%;
+  left: 86.9129849301%;
+  background: linear-gradient(to top, rgb(218, 96, 250), rgb(25, 255, 255));
+  filter: blur(3.1754721048px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 1.9518912816s;
+}
+.night .sparkle .sparkle15 {
+  border-radius: 50%;
+  height: 8.8678846555px;
+  width: 8.8678846555px;
+  position: absolute;
+  top: 40.0240461465%;
+  left: 57.3369673828%;
+  background: linear-gradient(to top, rgb(57, 104, 249), rgb(203, 255, 255));
+  filter: blur(4.447110174px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 2.5766648176s;
+}
+.night .sparkle .sparkle16 {
+  border-radius: 50%;
+  height: 8.4082836769px;
+  width: 8.4082836769px;
+  position: absolute;
+  top: 53.432661192%;
+  left: 91.8935071003%;
+  background: linear-gradient(to top, rgb(139, 143, 167), rgb(226, 255, 255));
+  filter: blur(3.8730287262px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 0.1146339991s;
+}
+.night .sparkle .sparkle17 {
+  border-radius: 50%;
+  height: 8.864323353px;
+  width: 8.864323353px;
+  position: absolute;
+  top: 75.1903045423%;
+  left: 6.2329455%;
+  background: linear-gradient(to top, rgb(211, 181, 251), rgb(121, 255, 255));
+  filter: blur(0.2749732611px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 6.6927889913s;
+}
+.night .sparkle .sparkle18 {
+  border-radius: 50%;
+  height: 1.0138455823px;
+  width: 1.0138455823px;
+  position: absolute;
+  top: 27.7810698728%;
+  left: 62.8687703478%;
+  background: linear-gradient(to top, rgb(72, 198, 205), rgb(132, 255, 255));
+  filter: blur(0.0622621884px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 9.0833177011s;
+}
+.night .sparkle .sparkle19 {
+  border-radius: 50%;
+  height: 9.415678399px;
+  width: 9.415678399px;
+  position: absolute;
+  top: 22.632537257%;
+  left: 67.9336960497%;
+  background: linear-gradient(to top, rgb(127, 195, 52), rgb(71, 255, 255));
+  filter: blur(4.5420714449px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 5.8702865069s;
+}
+.night .sparkle .sparkle20 {
+  border-radius: 50%;
+  height: 7.7236124994px;
+  width: 7.7236124994px;
+  position: absolute;
+  top: 25.9048932983%;
+  left: 39.0474671126%;
+  background: linear-gradient(to top, rgb(147, 30, 48), rgb(56, 255, 255));
+  filter: blur(1.0936330387px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 1.9488038174s;
+}
+.night .sparkle .sparkle21 {
+  border-radius: 50%;
+  height: 2.9050033252px;
+  width: 2.9050033252px;
+  position: absolute;
+  top: 92.5866566555%;
+  left: 62.6442786987%;
+  background: linear-gradient(to top, rgb(26, 116, 237), rgb(206, 255, 255));
+  filter: blur(3.4472305815px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 8.6854747236s;
+}
+.night .sparkle .sparkle22 {
+  border-radius: 50%;
+  height: 7.6885225594px;
+  width: 7.6885225594px;
+  position: absolute;
+  top: 31.7383588987%;
+  left: 89.4344367413%;
+  background: linear-gradient(to top, rgb(72, 221, 169), rgb(67, 255, 255));
+  filter: blur(2.2142272984px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 7.4706032389s;
+}
+.night .sparkle .sparkle23 {
+  border-radius: 50%;
+  height: 6.8419986997px;
+  width: 6.8419986997px;
+  position: absolute;
+  top: 33.5674613625%;
+  left: 73.8375985227%;
+  background: linear-gradient(to top, rgb(243, 108, 47), rgb(2, 255, 255));
+  filter: blur(4.9681438885px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 7.1554219963s;
+}
+.night .sparkle .sparkle24 {
+  border-radius: 50%;
+  height: 1.8345369229px;
+  width: 1.8345369229px;
+  position: absolute;
+  top: 16.0366745137%;
+  left: 31.1921346905%;
+  background: linear-gradient(to top, rgb(97, 176, 243), rgb(193, 255, 255));
+  filter: blur(4.7017300872px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 4.7640638879s;
+}
+.night .sparkle .sparkle25 {
+  border-radius: 50%;
+  height: 2.3353145343px;
+  width: 2.3353145343px;
+  position: absolute;
+  top: 4.1073847742%;
+  left: 70.5862361209%;
+  background: linear-gradient(to top, rgb(107, 132, 136), rgb(110, 255, 255));
+  filter: blur(4.2435714953px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 6.0348146297s;
+}
+.night .sparkle .sparkle26 {
+  border-radius: 50%;
+  height: 2.8295477026px;
+  width: 2.8295477026px;
+  position: absolute;
+  top: 1.5335799718%;
+  left: 76.3763815368%;
+  background: linear-gradient(to top, rgb(157, 73, 185), rgb(87, 255, 255));
+  filter: blur(3.2875762681px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 4.3329928689s;
+}
+.night .sparkle .sparkle27 {
+  border-radius: 50%;
+  height: 9.8029868584px;
+  width: 9.8029868584px;
+  position: absolute;
+  top: 38.1559538941%;
+  left: 52.5043361808%;
+  background: linear-gradient(to top, rgb(201, 241, 25), rgb(136, 255, 255));
+  filter: blur(2.3591262231px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 4.6426194845s;
+}
+.night .sparkle .sparkle28 {
+  border-radius: 50%;
+  height: 4.2417150034px;
+  width: 4.2417150034px;
+  position: absolute;
+  top: 52.2359641759%;
+  left: 21.001415427%;
+  background: linear-gradient(to top, rgb(247, 65, 10), rgb(22, 255, 255));
+  filter: blur(2.3465728801px);
+  animation: shinny infinite;
+  animation-duration: 1s;
+  animation-delay: 3.7149167264s;
+}
+.night .sparkle .sparkle29 {
+  border-radius: 50%;
+  height: 4.287094447px;
+  width: 4.287094447px;
+  position: absolute;
+  top: 27.1594783736%;
+  left: 77.5568034138%;
+  background: linear-gradient(to top, rgb(93, 218, 34), rgb(55, 255, 255));
+  filter: blur(2.5476877996px);
+  animation: shinny infinite;
+  animation-duration: 2s;
+  animation-delay: 8.7828654501s;
+}
+.night .rings {
+  width: 100%;
+  height: 0%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.night .rings .dot {
+  animation: bligbling 1s linear infinite;
+  border-radius: 50%;
+  filter: blur(1px);
+  position: absolute;
+}
+.night .rings .dot-1 {
+  width: 2px;
+  height: 5.6712844375px;
+  left: 15.5005869141%;
+  animation-delay: 3.2872925911s;
+}
+.night .rings .dot-2 {
+  width: 2px;
+  height: 12.5334431054px;
+  left: 19.1676493397%;
+  animation-delay: 0.2785269114s;
+}
+.night .rings .dot-3 {
+  width: 2px;
+  height: 5.638485132px;
+  left: 43.6417894632%;
+  animation-delay: 4.6344106295s;
+}
+.night .rings .dot-4 {
+  width: 2px;
+  height: 16.983259132px;
+  left: 69.6298261518%;
+  animation-delay: 0.3905817523s;
+}
+.night .rings .dot-5 {
+  width: 2px;
+  height: 6.6899439602px;
+  left: 94.4393315672%;
+  animation-delay: 0.8117851669s;
+}
+.night .rings .dot-6 {
+  width: 2px;
+  height: 2.8515007437px;
+  left: 82.7066907055%;
+  animation-delay: 1.6446171295s;
+}
+.night .rings .dot-7 {
+  width: 2px;
+  height: 7.5152039311px;
+  left: 31.2605591773%;
+  animation-delay: 0.4334724747s;
+}
+.night .rings .dot-8 {
+  width: 2px;
+  height: 12.2081770653px;
+  left: 93.6417402216%;
+  animation-delay: 3.4703831788s;
+}
+.night .rings .dot-9 {
+  width: 2px;
+  height: 6.7932222174px;
+  left: 80.1511050079%;
+  animation-delay: 1.3978307103s;
+}
+.night .rings .dot-10 {
+  width: 2px;
+  height: 16.7634302978px;
+  left: 48.816388438%;
+  animation-delay: 0.1161243416s;
+}
+.night .rings .dot-11 {
+  width: 2px;
+  height: 18.1258965869px;
+  left: 26.78062923%;
+  animation-delay: 0.9733173882s;
+}
+.night .rings .dot-12 {
+  width: 2px;
+  height: 18.6530535732px;
+  left: 88.4977780635%;
+  animation-delay: 3.9014791126s;
+}
+.night .rings .dot-13 {
+  width: 2px;
+  height: 2.6395790876px;
+  left: 40.6470402716%;
+  animation-delay: 0.240339786s;
+}
+.night .rings .dot-14 {
+  width: 2px;
+  height: 19.573764561px;
+  left: 34.8762895697%;
+  animation-delay: 3.3554619847s;
+}
+.night .rings .dot-15 {
+  width: 2px;
+  height: 10.0308405628px;
+  left: 50.1514760483%;
+  animation-delay: 1.555240324s;
+}
+.night .rings .dot-16 {
+  width: 2px;
+  height: 7.5469233771px;
+  left: 74.6733656341%;
+  animation-delay: 1.0465154709s;
+}
+.night .rings .dot-17 {
+  width: 2px;
+  height: 1.7329743373px;
+  left: 70.8864997521%;
+  animation-delay: 1.1455271103s;
+}
+.night .rings .dot-18 {
+  width: 2px;
+  height: 10.4937783303px;
+  left: 56.2420072842%;
+  animation-delay: 3.877706433s;
+}
+.night .rings .dot-19 {
+  width: 2px;
+  height: 5.381631234px;
+  left: 36.1722744965%;
+  animation-delay: 2.0861532151s;
+}
+.night .rings .dot-20 {
+  width: 2px;
+  height: 14.4831775218px;
+  left: 41.2739992077%;
+  animation-delay: 1.6485217266s;
+}
+.night .rings .dot-21 {
+  width: 2px;
+  height: 13.5878909515px;
+  left: 67.3841583707%;
+  animation-delay: 4.3880373072s;
+}
+.night .rings .dot-22 {
+  width: 2px;
+  height: 7.4726463099px;
+  left: 71.4628378276%;
+  animation-delay: 4.281252781s;
+}
+.night .rings .dot-23 {
+  width: 2px;
+  height: 12.777807928px;
+  left: 73.5592857276%;
+  animation-delay: 0.6041815769s;
+}
+.night .rings .dot-24 {
+  width: 2px;
+  height: 16.6188288382px;
+  left: 90.9208421685%;
+  animation-delay: 2.9175331277s;
+}
+.night .rings .dot-25 {
+  width: 2px;
+  height: 6.3719187128px;
+  left: 60.9788190055%;
+  animation-delay: 4.2614991589s;
+}
+.night .rings .dot-26 {
+  width: 2px;
+  height: 4.0356718034px;
+  left: 36.7629985622%;
+  animation-delay: 4.8156497772s;
+}
+.night .rings .dot-27 {
+  width: 2px;
+  height: 1.7753160174px;
+  left: 56.1442957328%;
+  animation-delay: 4.4423707633s;
+}
+.night .rings .dot-28 {
+  width: 2px;
+  height: 14.6383946363px;
+  left: 87.8770921634%;
+  animation-delay: 0.0856067705s;
+}
+.night .rings .dot-29 {
+  width: 2px;
+  height: 3.537545829px;
+  left: 40.8845215802%;
+  animation-delay: 0.0748552399s;
+}
+.night .rings .dot-30 {
+  width: 2px;
+  height: 7.4999157482px;
+  left: 40.2278539923%;
+  animation-delay: 0.5109716432s;
+}
+.night .rings .dot-31 {
+  width: 2px;
+  height: 9.7840084283px;
+  left: 20.287829659%;
+  animation-delay: 3.5012620521s;
+}
+.night .rings .dot-32 {
+  width: 2px;
+  height: 11.1117622447px;
+  left: 48.4245616121%;
+  animation-delay: 4.7478348001s;
+}
+.night .rings .dot-33 {
+  width: 2px;
+  height: 17.7050551328px;
+  left: 55.7962185169%;
+  animation-delay: 0.8474715791s;
+}
+.night .rings .dot-34 {
+  width: 2px;
+  height: 5.1079603626px;
+  left: 35.1803833273%;
+  animation-delay: 3.4213082132s;
+}
+.night .rings .dot-35 {
+  width: 2px;
+  height: 14.8775782852px;
+  left: 38.6193914659%;
+  animation-delay: 2.9961093122s;
+}
+.night .rings .dot-36 {
+  width: 2px;
+  height: 12.6514618484px;
+  left: 73.9775829131%;
+  animation-delay: 0.7453139138s;
+}
+.night .rings .dot-37 {
+  width: 2px;
+  height: 10.4062289404px;
+  left: 24.2210830945%;
+  animation-delay: 4.0728652965s;
+}
+.night .rings .dot-38 {
+  width: 2px;
+  height: 2.7341896754px;
+  left: 59.0925416085%;
+  animation-delay: 4.8532720044s;
+}
+.night .rings .dot-39 {
+  width: 2px;
+  height: 3.4057743383px;
+  left: 24.4720994857%;
+  animation-delay: 2.7542209053s;
+}
+.night .rings .dot-40 {
+  width: 2px;
+  height: 1.0835770765px;
+  left: 56.1113392492%;
+  animation-delay: 2.2554981186s;
+}
+.night .rings .dot-41 {
+  width: 2px;
+  height: 6.685688204px;
+  left: 48.066165828%;
+  animation-delay: 1.993747768s;
+}
+.night .rings .dot-42 {
+  width: 2px;
+  height: 6.7787016593px;
+  left: 51.9034937884%;
+  animation-delay: 1.2485259095s;
+}
+.night .rings .dot-43 {
+  width: 2px;
+  height: 4.9568221777px;
+  left: 35.2489565425%;
+  animation-delay: 4.5020732448s;
+}
+.night .rings .dot-44 {
+  width: 2px;
+  height: 16.1537649651px;
+  left: 72.8176728713%;
+  animation-delay: 0.930133549s;
+}
+.night .rings .dot-45 {
+  width: 2px;
+  height: 17.9637732681px;
+  left: 35.6550566369%;
+  animation-delay: 2.5317704779s;
+}
+.night .rings .dot-46 {
+  width: 2px;
+  height: 3.1867610723px;
+  left: 70.3897262761%;
+  animation-delay: 3.3833570601s;
+}
+.night .rings .dot-47 {
+  width: 2px;
+  height: 18.8893038533px;
+  left: 83.6550569408%;
+  animation-delay: 2.2290017519s;
+}
+.night .rings .dot-48 {
+  width: 2px;
+  height: 10.512133323px;
+  left: 69.5496542292%;
+  animation-delay: 2.9547355573s;
+}
+.night .rings .dot-49 {
+  width: 2px;
+  height: 4.7639343727px;
+  left: 63.4007012615%;
+  animation-delay: 3.9704164057s;
+}/*# sourceMappingURL=fireworker.css.map */

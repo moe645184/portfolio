@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* flex: X Y Zpx   X: flex-grow(預設0，當有剩餘空間時，可增加幾份。)  Y:flex-shrink(預設1，當空間不足時，該扣除幾份。) Z:flex-basis(預設auto，預計保留的空間)
+    當flex只有兩個時，若第二個數字無width單位時則認定為flex-shrink，有則為felx-basis。
+    當flex一個時，若無單位則為flex-grow，有則為flex-basis*/
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .panels {
+        height: 100vh;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .panel {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+        transition:
+            font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+            flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+            background 0.2s;
+    }
+
+    .panel>* {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s;
+    }
+
+    .panel :nth-child(1) {
+        transform: translateY(-100%);
+    }
+
+    .panel.open-later :nth-child(1) {
+        transform: translateY(0);
+    }
+
+    .panel :nth-child(3) {
+        transform: translateY(100%);
+    }
+
+    .panel.open-later :nth-child(3) {
+        transform: translateY(0);
+    }
+
+    .panel1 {
+        background-image: url(https://img.freepik.com/free-vector/abstract-landscape-background-traditional-japanese-themed-watercolour-style_1048-16449.jpg?w=360&t=st=1664261240~exp=1664261840~hmac=e5d581e9205b850ba11f9633d4686a96e36a736cdb1b173bd698218d715428ff);
+    }
+
+    .panel2 {
+        background-image: url(https://img.freepik.com/free-photo/wet-vietnam-mountain-flow-stream-rural_1417-1357.jpg?w=996&t=st=1664261411~exp=1664262011~hmac=7235705a0e06e37c8c41e1040b5a0e42144b3dc6691123522ee3eab250e23887);
+    }
+
+    .panel3 {
+        background-image: url(https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?w=996&t=st=1664261468~exp=1664262068~hmac=a591ca3ec0f6b8b2329a49ea16d970e982a996d2703838e421df4a84fea741ff);
+    }
+
+    .panel4 {
+        background-image: url(https://img.freepik.com/free-photo/doi-luang-chiang-dao-mountains-sunrise-chiang-mai-thailand_335224-1400.jpg?w=996&t=st=1664261482~exp=1664262082~hmac=6c570e92b5967db663b6b9474ab166924020616609d9191c0f0650d268dd454a);
+    }
+
+    .panel5 {
+        background-image: url(https://img.freepik.com/free-photo/tourists-take-boat-ban-rak-thai-village-mae-hong-son-province-thailand_335224-1302.jpg?w=996&t=st=1664261496~exp=1664262096~hmac=a99f47981d296364fa9eb1e83038362262fe31d0a759c7bbf295e9ec8f2ecb08);
+    }
+
+    .panel>p {
+        font-family: fantasy;
+        color: white;
+        text-shadow: 3px 3px 2px grey;
+    }
+
+    .panel p:nth-child(2) {
+        font-size: 4em;
+    }
+
+    .panel.open {
+        flex: 5;
+        font-size: 40px;
+    }
+</style>
+
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>HEY</p>
+            <p>LET'S</p>
+            <p>JUDE</p>
+        </div>
+        <div class="panel panel2">
+            <p>IT</p>
+            <p>TAKE</p>
+            <p>EASY</p>
+        </div>
+        <div class="panel panel3">
+            <p>LITTLE</p>
+            <p>A</p>
+            <p>BIT</p>
+        </div>
+        <div class="panel panel4">
+            <p>IN</p>
+            <p>REST</p>
+            <p>PEACE</p>
+        </div>
+        <div class="panel panel5">
+            <p>MEN</p>
+            <p>YO</p>
+            <p>'SUP</p>
+        </div>
+    </div>
+</body>
+
+<script>
+    const panels = document.querySelectorAll('.panel')
+    panels.forEach(panel => {
+        panel.addEventListener('click', function () {
+            panel.classList.toggle('open')
+        })
+    });
+
+    panels.forEach(panel =>{
+        panel.addEventListener('transitionend', function (e) {
+            console.log(e.propertyName)
+            //為什麼一定要用判斷式，直接用toggle不行
+            //proprtyName是CSS裡面的transition有使用到的屬性
+            if (e.propertyName.includes('flex')) {
+                this.classList.toggle('open-later');
+            }
+        })
+    });
+</script>
+
+</html>

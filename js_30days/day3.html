@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        text-align: center;
+        line-height: 100px;
+        background: radial-gradient(grey, white);
+        font-family: Arial;
+    }
+
+    :root {
+        --color: black;
+        --spacing: 10px;
+        --blur: 1px;
+    }
+
+    span {
+        color: var(--color);
+    }
+
+    img {
+        width: 80%;
+        border-radius: 15px;
+        padding: var(--spacing);
+        filter: blur(var(--blur));
+        background-color: var(--color);
+    }
+</style>
+
+<body>
+
+    <header>
+        <h1>Update CSS Variables with <span>JS</span></h1>
+    </header>
+    <main>
+        <label for="spacing">Spacing：</label>
+        <input type="range" id="spacing" name="spacing" min="0" max="50" data-unit="px">
+        <label for="blur">Blur：</label>
+        <input type="range" id="blur" name="blur" min="0" max="10" data-unit="px">
+        <label for="color">Color：</label>
+        <input type="color" id="color" name="color" data-unit="">
+        <img src="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=900&t=st=1664074943~exp=1664075543~hmac=ce3f0676e6f846aef41a43d5f0d40e2121740ac3e8390704b2ccf2737fc24bc9"
+            alt="貓咪圖片">
+    </main>
+
+    <script>
+        const inputs = document.querySelectorAll('input')
+
+        // //決定後的樣式改變
+        // inputs.forEach(input => {
+        //     input.addEventListener('change', function () {
+        //         let unit = input.dataset.unit
+        //          //documnt.documentElement 是抓文件中的根元素 style.setProperty(property name, value) 要改CSS用setProperty 要改HTML用setAttribute
+        //         document.documentElement.style.setProperty(`--${input.name}`, input.value + unit)
+        //     })
+        // }
+        // );
+
+        // //滑鼠在移動的時候的樣式改變
+        // inputs.forEach(input => {
+        //     input.addEventListener('mousemove', function () {
+        //         let unit = input.dataset.unit
+        //         document.documentElement.style.setProperty(`--${input.name}`, input.value + unit)
+        //     })
+        // }
+        // );
+
+        //看起來太不簡潔了，重複的部分合體!!
+        //設定共同的部分：function 讓監聽事件的function可以直接呼叫就好!!
+        function rootChange() {
+            let unit = this.dataset.unit
+            //為什麼這邊要改成this?因為input在這邊沒有被定義!!會抓不到！this介紹：p114
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + unit)
+        }
+
+        inputs.forEach(input => {
+            //監聽事件中呼叫函式的()需省略(P254)
+            input.addEventListener('change', rootChange)
+        }
+        );
+
+        inputs.forEach(input => {
+            input.addEventListener('mousemove', rootChange)
+        }
+        );
+        
+
+    </script>
+
+</body>
+
+</html>

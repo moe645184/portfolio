@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<body>
+    <pre>
+    <h1>SVG : 基本觀念與操作</h1>
+                        資料來源：https://www.w3schools.com/graphics/svg_intro.asp
+                                https://ithelp.ithome.com.tw/m/articles/10200720
+    <h2>1.定義</h2>
+        1-1 SVG 代表可縮放矢量圖形
+        1-2 SVG 用於為 Web 定義基於矢量的圖形
+        1-3 SVG 以 XML 格式定義圖形 XML:可延伸標記式語言（英語：Extensible Markup Language，簡稱：XML）是一種標記式語言。 **想想HTML，是一樣的意思!!!** 
+                                                (by 維基百科 https://zh.wikipedia.org/zh-tw/XML)
+        1-4 SVG 文件中的每個元素和每個屬性都可以設置動畫 *******潮!!!就是潮!!!!*******
+        1-5 SVG 是 W3C 推薦的
+        1-6 SVG 與其他 W3C 標準集成，例如 DOM 和 XSL
+
+        <h2>2.優勢</h2>
+        與其他圖像格式（如 JPEG 和 GIF）相比，使用 SVG 的優點是
+    
+            2-1 SVG 文件是純 XML，可以使用任何文本編輯器創建和編輯 SVG 圖像
+            2-2 可以搜尋、索引、編寫腳本和壓縮 SVG 圖像 **可以寫JS!!!!!**
+            2-3 SVG 圖形在縮放或調整大小時不會失真 **毀滅吧!!!JPG**
+            2-4 SVG 是一個開放標準
+
+    <h2>3.標籤定義</h2>
+    **以下標籤< 會空一格，這樣才能顯示出來，記得自己打的時候不要空白喔。
+        2-1 < svg>
+        SVG起手式，常搭配的屬性有：width、height(SVG的長寬，預設單位px)，version(使用的SVG版本)，xmlns(SVG命名空間 →https://zh.wikipedia.org/zh-tw/XML%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4)
+
+        2-2 < g >
+        等同於AI裡面的同一圖層的概念
+
+        2-3 形狀屬性(形狀會在第4部分一一介紹)
+        x,y 座標定位，單位預設px width,height 形狀長寬 fill 形狀填色 
+        stroke 邊框填色 stroke-width 邊框寬度 單位預設px
+
+        2-4 < def>放模組定義的地方
+
+    <h2>4.在HTML裡畫一個圖形</h2>
+    <h3>4-1 圓形(circle)：cx,cy圓心位置 單位預設px，如果沒寫，會預設0,0 r半徑 單位px</h3>
+        <svg width="74" height="74" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="20" stroke="black" stroke-width="4" fill="green"/>
+        </svg>
+            < svg> width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+                < circle cx="50" cy="50" r="20" stroke="black" stroke-width="4" fill="green"/>
+            < /svg>
+
+    <h3>4-2 橢圓形(ellipse):rx,ry為x與y方向之半徑，單位預設px</h3>
+        <svg width="124" height="120">
+            <ellipse cx="62" cy="60" rx="60" ry="20" stroke="black" stroke-width="4" fill="green"/>
+        </svg>
+    
+    <h3>4-3 矩形(rect):x,y為矩形左上位置，單位預設px width,height為矩形長寬，單位預設px rx,ry可以產生圓角效果</h3>
+        <svg width="120" height="120">
+            <rect x="4" y="4" rx="15" ry="15" width="100" height="100" stroke="black" stroke-width="4" fill="green"/>
+        </svg>
+        < svg width="120" height="120">
+        < rect x="10" y="10" rx="15" ry="15" width="100" height="100" stroke="black" stroke-width="4" fill="green"/>
+        < /svg>
+    
+    <h3>4-4 線段(line):x1,y1 第一組座標 x2,y2欲連線之第二組座標</h3>
+        <svg width="120" height="120">
+            <line x1="0" y1="0" x2="120" y2="120" stroke="black" stroke-width="4" />
+        </svg>
+        < svg width="120" height="120">
+            < line x1="0" y1="0" x2="120" y2="120" stroke="black" stroke-width="4" />
+        < /svg>
+    
+    <h3>4-5 多邊形(polygon):point 設定x1 y1 ....xn yn，會自動將這些x y連線</h3>
+        <svg width="120" height="120">
+            <polygon points="60,0 15,120 120,45 0,45 105,120" stroke="black" stroke-width="4" fill="green"/>
+        </svg>
+        < svg width="120" height="120">
+            < polygon points="60,0 15,120 120,45 0,45 105,120" stroke="black" stroke-width="4" fill="green"/>
+        < /svg>
+        用point="x,y x,y x,y x,y ..."的方式定義每個點，就可以創造奇蹟!!也可以透過fill-rule改變填色規則
+    
+    <h3>4-6 折線(polyline):跟4-5一樣，只是不會自動圍成一個形狀</h3>
+        <svg width="120" height="120">
+            <polyline points="60,0 15,120 120,45 0,45 105,120" stroke="black" stroke-width="4" fill="green"/>
+        </svg>
+        < svg width="120" height="120">
+            < polyline points="60,0 15,120 120,45 0,45 105,120" stroke="black" stroke-width="4" fill="green"/>
+        < /svg>
+        可以比較跟4-5多邊形的差別
+    
+    <h3>4-7 路徑(path)：d 路徑指令，指令+參數的序列組成 transform 路徑的變形效果</h3>
+        a.path指令：以下在path中大寫為絕對位置，小寫為相對位置
+            指令
+            M/m = moveto 起始點移動至x y
+            Z/z = closepath 將路徑變為封閉路徑，將當前座標跟第一個座標連起來。
+
+            直線指令
+            L/l = lineto 從當前座標，做一線段至終點 x y
+            H/h = horizontal lineto 從當前座標，畫水平線段至指定的x。
+            V/v = vertical lineto 從當前座標，畫垂直線段至指定的y。
+
+            曲線
+            C/c = curveto 曲線 畫一參考點1 x1,y1 參考點2 x2,y2 結束點x,y 的曲線 
+            S/s = smooth curveto 平滑曲線：從當前座標畫一控制點為(x2,y2) 終點為(x,y)的反射曲線
+            Q/q = quadratic Bézier curve 二次貝茲曲線：從當前座標畫一控制點為(x2,y2) 終點為(x,y)的二次貝茲曲線
+            T/t = smooth quadratic Bézier curveto 平滑二次貝茲曲線：從當前座標畫一反射控制點為(x2,y2) 終點為(x,y)的反射貝茲曲線
+            A/a = elliptical Arc 畫一橢圓半徑為rx及ry 弧線與x軸旋轉角度為x-axis-rotation 角度弧線為large-arc-flag(0最小~1最大) 且方向為sweep-flag(1=順時針 0=逆時鐘) 作畫於x y
+
+        b.範例
+        <svg width="130" height="130">
+            <path d="M 0 0 L 60 0 V 30 H 120 C 120 30 90 60 120 120 S 100 60 60 120 Q30 30 0 120 T0 120 0 60 30 60 60 60 z"  stroke="black" stroke-width="4" fill="none"/>
+        </svg>
+        < svg width="130" height="130">
+            < path d="M 0 0 L 60 0 V 30 H 120 C 120 30 90 60 120 120 S 100 60 60 120 Q30 30 0 120 T0 120 0 60 30 60 60 60 z"  stroke="black" stroke-width="4" fill="none"/>
+        < /svg>
+        我也沒有很熟，慢慢玩吧!!!W3Sclhhol表示：很複雜嗎？沒錯！去用編輯器做就好了。
+
+    <h3>4-8 text</h3>
+        a.text
+        <svg height="60" width="200">
+            <circle cx="15" cy="15" r="15" stroke="black" fill="green"  />
+            <text x="0" y="15" fill="red" transform="rotate(30 20,40)">I love SVG!
+                <tspan x="30" y="0" >這是tspan</tspan>
+            </text>
+            <a href="#">
+                <text x="50" y="15" fill="blue">也可以放a標籤，可以點我</text>
+            </a>
+        </svg>
+        
+        < svg height="60" width="300">
+            < circle cx="15" cy="15" r="15" stroke="black" fill="green"  />
+            < text x="0" y="15" fill="red" transform="rotate(30 20,40)">I love SVG!
+                < tspan x="30" y="0" >這是tspan</tspan>
+            < /text>
+            < a href="#">
+                < text x="50" y="15" fill="blue">也可以放a標籤，可以點我</text>
+            < /a>
+        < /svg>
+        x,y設定起始位置，fill表示文字顏色
+
+        b.文字設定
+            b1起始點位置(x,y 絕對位置// dx,dy 相對位置)
+
+                <svg width="200" height="60">
+                    <text x="10" y="10">text x="10" y="10"</text>
+                    <text x="10,30,50,70" y="30">絕對位置</text>
+                    <text x="10" y="50" dx="0,20,20,20" y="0">相對位置</text>
+                </svg>
+            < svg x="200" y="60">
+                < text x="10" y="10">text x="10" y="10"</text>
+                < text x="10,30,50,70" y="30">絕對位置</text>
+                < text x="10" y="50" dx="0,20,20,20" y="0">相對位置</text>
+            < /svg>
+
+            b2 rotate旋轉
+            <svg width="200" height="20">
+                <text x="10" y="10" rotate="30">旋轉跳躍我不停歇</text>
+            </svg>
+            < svg width="200" height="20">
+                < text x="10" y="10" rotate="30">旋轉跳躍我不停歇</text>
+            < /svg>
+
+            b3設定文長 textlength & lengthAdjust="spacing"
+
+            <svg width="200" height="20">
+                <text x="10" y="10" textLength="150" lengthAdjust="spacing">旋轉跳躍我不停歇</text>
+            </svg>
+            < svg width="200" height="20">
+                < text x="10" y="10" textLength="150" lengthAdjust="spacing">旋轉跳躍我不停歇</text>
+            < /svg>
+
+            b4 writing-mode="tb" 直書
+
+            <svg width="200" height="40">
+                <text x="20" y="5" writing-mode="tb">直書</text>
+            </svg>
+
+            b5 text-anchor 文字開始位置
+            <svg width="600" height="70">
+                <text x="100" y="20" text-anchor="start">這是start</text>
+                <text x="100" y="40" text-anchor="middle">這是middle</text>
+                <text x="100" y="60" text-anchor="end">這是end</text>
+            </svg>
+            < svg width="600" height="70">
+                < text x="100" y="20" text-anchor="start">這是start</text>
+                < text x="100" y="40" text-anchor="middle">這是middle</text>
+                < text x="100" y="60" text-anchor="end">這是end</text>
+            < /svg>
+
+            b6 text on Path/路徑文字
+            <svg>
+                <defs>
+                <path id="path" d="M10 10  Q50 50 ,100 30 T150 50" stroke="black" fill="transparent"/>
+                </defs>
+                <text x="20" y="20">
+                    <textPath xlink:href="#path">扭來扭去的文字們~~~~~
+                </textPath>
+                </text>
+            </svg>
+            < svg>
+                < defs>
+                < path id="path" d="M10 10  Q50 50 ,100 60 T150 0" stroke="black" fill="transparent"/>
+                < /defs>
+                < text x="20" y="20">
+                    < textPath xlink:href="#path">扭來扭去的文字們~~~~~
+                < /textPath>
+                < /text>
+            < /svg>
+            先將想要套用的模組寫在defs裡面，後來再使用href呼叫
+
+    <h2>5.viewport / viewbox</h2>
+        <h3>5-1 viewport ：SVG上訂的長寬，即SVG可視範圍</h3>
+        <h3>5-2 viewbox(x,y,width,height):代表SVG上真正可以讓人看到的範圍。x,y為左上角直，width與height為範圍</h3>
+        <svg width="200" height="200">
+            <rect x="50" y="50" width="100" height="100" fill="green"></rect>
+        </svg>
+        <svg width="200" height="200" viewBox="50,50,100,100">
+            <rect x="50" y="50" width="100" height="100" fill="green"></rect>
+        </svg>
+            < svg width="200" height="200">
+                < rect x="50" y="50" width="100" height="100" fill="green"></rect>
+            < /svg>
+            < svg width="200" height="200" viewBox="50,50,100,100">
+                < rect x="50" y="50" width="100" height="100" fill="green"></rect>
+            < /svg>
+            上圖兩者皆相同，只有viewbox不一樣。
+
+        <h3>5-3 viewbox = viewport viewbox 預設值 // viewbox < viewport viewbox會被放大 // viewbox > viewport viewbox會被縮小</h3>
+        <h3>5-4 preserveAspectRatio 有興趣可以再去了解 --> https://ithelp.ithome.com.tw/m/articles/10200724</h3>
+    
+    <h2>6.clipping / masking</h2>
+        <h3>6-1 clipping 類似剪裁遮色片，會裁掉遮色片以外的"套用圖案"範圍。需先在def中定義clipPath，之後才再圖案中引用。</h3>
+        <svg width="200" height="120">
+            <defs>
+                <clipPath id="clipping">
+                    <circle cx="10" cy="100" r="25"></circle>
+                </clipPath>
+            </defs>
+            <rect x="10" y="10" width="150" height="100" stroke="black" fill="green" clip-path="url(#clipping)"></rect>
+        </svg>
+            < svg width="200" height="200">
+                < defs>
+                    < clipPath id="clipping">
+                        < circle cx="10" cy="10" r="25"></circle>
+                    < /clipPath>
+                < /defs>
+                < rect x="10" y="10" width="150" height="100" stroke="black" fill="green" clip-path="url(#clipping)"></rect>
+            < /svg>
+            矩形剩下與遮色片覆蓋的範圍4
+
+        <h3>6-2 masking 類似透明度遮色片，越黑越透明，越白越不透明，fill一定要寫窩</h3>
+        <svg width="200" height="200">
+            <defs>
+                <radialGradient id="a2" cx="50%" cy="50%" fx="50%" fy="50%" r="76%" > 
+                    <stop stop-color="#ffffff" offset="0%"></stop> 
+                    <stop stop-color="black" offset="60%"></stop> 
+                </radialGradient>  
+                <mask id="mask">
+                    <rect x="0" y="0" width="200" height="200" fill="url(#a2)"/>
+                </mask>
+            </defs>
+            <rect x="0" y="0" width="200" height="200" stroke="black" fill="green" mask="url(#mask)"></rect>
+        </svg>
+    
+    <h2>7.SVG-transform:svg-transform和css-transform有異曲同工之妙，有translate/位移、scale/縮放、rotate/旋轉、skew/傾斜屬性</h2>
+        <h3>7-1 translate(tx,ty) / 位移(x軸移動,y軸移動)</h3>
+        <svg width="200" height="200">
+            <rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+            <rect x="10" y="10" width="50" height="50" stroke="black" fill="red" transform="translate(50,50)"/>
+        </svg>
+            < svg width="200" height="200">
+                < rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+                < rect x="10" y="10" width="50" height="50" stroke="black" fill="red" transform="translate(50,50)"/>
+            < /svg>
+        <h3>7-2 scale(sx,sy) /縮放(x軸縮放,y軸縮放)</h3>
+        <svg width="200" height="100">
+            <rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+            <rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="scale(1.3,1.5)"/>
+        </svg>
+            < svg width="200" height="100">
+                < rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+                < rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="scale(1.3,1.5)"/>
+            < /svg>
+
+        <h3>7-3 rotate(angle,cx,cy) /旋轉(角度,圓心x,圓心y) *通常只要寫角度就可以了，預設圓心為當前座標位置(0,0)</h3>
+        <svg width="200" height="100">
+            <rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+            <rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="rotate(30,85,35)"/>
+        </svg>
+            < svg width="200" height="100">
+                < rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+                < rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="rotate(30,85,35)"/>
+            < /svg>
+
+        <h3>7-4 skewX(angle) skewY(angle) /X軸傾斜(角度) Y軸傾斜(角度)</h3>
+        <svg width="200" height="100">
+            <rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+            <rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="skewX(30)"/>
+        </svg>
+            < svg width="200" height="100">
+                < rect x="10" y="10" width="50" height="50" stroke="black" fill="green"/>
+                < rect x="60" y="10" width="50" height="50" stroke="black" fill="red" transform="skewX(30)"/>
+            < /svg>
+    
+    <h2>8. animation 動畫</h2>
+        <h3>8-1 SVG是根據SMIL規範開發，SMIL規範允許</h3>
+            a.變動元素數字屬性x、y……
+            b.變動變形屬性transform
+            c.變動顏色屬性
+            d.物件方向與運動路徑方向同步
+
+        <h3>8-2 可輸入元素：</h3>
+            a.< animate> *最常用
+            b.< animateTransform>
+            c.< animateMotion>
+        
+        <h3>8-3 animate 可用屬性</h3>
+            a.attributeName 屬性名稱
+            b.from 變動初始值
+            c.to 變動終點值
+            d.dur 動畫持續持間
+            e.repeatCount 動畫重複次數
+        
+        <svg width="300" height="100">
+            <rect width="300" height="100" />
+            <circle cx="0" cy="50" r="25" stroke="white">
+                <animate attributeName="cx" from="0" to="300" dur="1s"
+                repeatCount="indefinite" />
+            </circle>
+        </svg>
+        < svg width="300" height="100">
+            < rect width="300" height="100" />
+            < circle cx="0" cy="50" r="25" stroke="white">
+                < animate attributeName="cx" from="0" to="300" dur="1s"
+                repeatCount="indefinite" />
+            < /circle>
+        < /svg>
+
+        <h3>8-4 animateTransform 可用屬性</h3>
+            a.attributeName 屬性名稱
+            b.dur 動畫持續時間
+            c.repeatCouunt 動畫執行次數
+            d.type 選擇transform方式，有ccale / rotate / translate
+            e.from 型變起始狀態
+            f.to 型便結束狀態
+
+        <svg width="200" height="100">
+            <rect x="10" y="10" width="100" height="50"> 
+                <animateTransform attributeName="transform" dur="1s" repeatCount="indefinite" type="scale" from="1" to="1.5"/>
+            </rect>
+        </svg>
+        < svg width="200" height="100">
+            < rect x="10" y="10" width="100" height="50"> 
+                < animateTransform attributeName="transform" dur="1s" 
+                repeatCount="indefinite" type="scale" from="1" to="1.5"/>
+            < /rect>
+        < /svg>
+
+        <h3>8-5 animateMotion 可用屬性 </h3>
+            a.dur 動畫持續時間
+            b.repeatCount 動畫執行次數
+            c.rotate 隨路徑自動旋轉
+        <svg width="250" height="150">
+            <path d="M0 0 T50 50 100 90 150 30 200 50" stroke="black" fill="none"/>
+            <rect x="0" y="0" width="30" height="30">
+                <animateMotion dur="2s" repeatCount="indefinite" rotate="auto" path="M0 0 T50 50 100 90 150 30 200 50"/>
+            </rect>
+        </svg>
+        < svg width="250" height="150">
+            < path d="M0 0 T50 50 100 90 150 30 200 50" stroke="black" fill="none"/>
+            < rect x="0" y="0" width="30" height="30">
+                < animateMotion dur="2s" repeatCount="indefinite" rotate="auto" path="M0 0 T50 50 100 90 150 30 200 50"/>
+            < /rect>
+        < /svg>
+
+    
+    </pre>
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        background:radial-gradient(grey,white)
+    }
+
+    .hint{
+        border: 1px solid white;
+        position: absolute;
+        width: 600px;
+        height: 100px;
+        border-radius: 15px;
+        color: white;
+        left: 0;
+        right: 0;
+        top: 20%;
+        margin: auto;
+        text-align: center;
+        font-size: 40px;
+        line-height: 100px;
+    }
+
+    .wrap{
+        display: flex;
+        margin: auto;
+        justify-content: center;
+    }
+
+    .wrap div{
+        margin: 10px;
+        width: 80px;
+        height: 80px;
+        border: 5px solid white;
+        text-align: center;
+        color: white;
+        border-radius: 15px;
+    }
+
+
+    .red{
+        color: red !important;
+    }
+
+
+
+</style>
+
+<body>
+    <div class="hint">您現在點擊的是</div>
+    <div class="wrap">
+        <div data-code="65" class='btn' onclick="yo(event,'apple')">
+            <h1>A</h1>
+            <p>Apple</p>
+        </div>
+        <div data-code="66" class='btn' onclick="yo(event,'Bee')">
+            <h1>B</h1>
+            <p>Bee</p>
+        </div>
+        <div data-code="67" class='btn' onclick="yo(event,'Cat')">
+            <h1>C</h1>
+            <p>Cat</p>
+        </div>
+        <div data-code="68" class='btn' onclick="yo(event,'Dog')">
+            <h1>D</h1>
+            <p>Dog</p>
+        </div>
+        <div data-code="69" class='btn' onclick="yo(event,'Egg')">
+            <h1>E</h1>
+            <p>Egg</p>
+        </div>
+        <div data-code="70" class='btn' onclick="yo(event,'Fog')">
+            <h1>F</h1>
+            <p>Fog</p>
+        </div>
+        <div data-code="71"  class='btn' onclick="yo(event,'Game')">
+            <h1>G</h1>
+            <p>Game</p>
+        </div>
+        <div data-code="72"  class='btn' onclick="yo(event,'Hot')">
+            <h1>H</h1>
+            <p>Hot</p>
+        </div>
+        <div data-code="73"  class='btn' onclick="yo(event,'Ice')">
+            <h1>I</h1>
+            <p>Ice</p>
+        </div>
+    </div>
+</body>
+
+<script>
+let hint = document.querySelector('.hint')
+let btn = document.querySelectorAll('.btn')
+
+function yo(evt,words) {
+    hint.innerHTML = words
+
+    // for (let i = 0; i < btn.length; i++) {
+    //     const element = btn[i]
+    //     btn[i].style.color = 'white'
+    // }
+        btn.forEach(btns => {
+            //重製顏色。remove掉就好
+            btns.classList.remove('red')
+        });
+        evt.currentTarget.classList.add('red')
+}
+
+// //監聽事件 https://www.w3schools.com/jsref/dom_obj_event.asp
+// //function裡面的變數是作用的對象
+// document.addEventListener('keydown',function(yoo){
+//     //清除red的class
+//     btn.forEach(btns => {
+//             btns.classList.remove('red')
+//         });
+
+//     //抓出鍵盤對應的畫面按鍵
+//     //插值用法`${變數}`
+//     let key = document.querySelector(`div[data-key='${yoo.keyCode}']`)
+//     console.log(key)
+//     key.classList.add('red')
+
+//     //印出點擊的字
+//     let content =  key.querySelector('p')
+//     console.log(key.querySelector('p'))
+//     //content.textContent是p的內容，直接印出content會是元素
+//     hint.innerHTML = content.textContent
+// })
+//target 實際目標 currentTarger設定事件的元素
+
+// 作用範圍.addEventListener('監聽的事件',function(變數){要做的事情})
+document.addEventListener('keydown',function(x){
+    btn.forEach(element => {
+        element.classList.remove("red")
+    });
+    // for (let index = 0; index < btn.length; index++) {
+    //     btn[index].classList.remove('red');
+    // }
+    //監聽事件按下a鍵時會取得a鍵的keyCode = 65     想辦法讓我們可以抓到裝著A的div => data-name= 65
+    //按下按鍵，可以選到對應的div
+    let key = document.querySelector(`div[data-code="${x.keyCode}"]`)
+    key.classList.add('red')
+
+    let content = key.querySelector('p')
+    hint.innerHTML = content.textContent
+
+    
+    // // 字串裡面要放變數 例如 
+    // var X = 1  
+    // console.log(X+1)   1 + 1= 2
+    // console.log('X'+)  'X'這個字 再加上 1 這個字 = X1
+
+    // document.querySelector('字串')
+    // 字串又要加上變數 `${}`
+    // step1 '' 變成 ``
+    // step2 把變數的部份加上${}
+    // =>document.querySelector('div[data-code="65"]') 但我們的data-code = x.keyCode
+    // step1 '' 變成 ``
+    // step2 把變數的部份加上${}
+    // =>插入變數 document.querySelector(`div[data-code="${x.keyCode}"]`)
+
+
+    // console.log(key)
+})
+
+
+
+
+// array.forEach(element => {
+// }); 
+
+// array = 陣列
+// element(變數，可以改名) = array[0] array[1] .....array[最後一個]
+
+// for (let index = 0; index < array.length; index++) {
+//     const element = array[index];
+//     }
+// 如果index = 1 ; array[1],array[2],array[3],array[4],array[5] =>但是陣列的第一筆資料是array[0]
+// index 變數(可以改名字) 就是個變數(拿來當我要跑的限制數量)
+// index = 0 / index < 1(長度)
+// array[0,1,2] 跑(長度)3次 = array.length
+// array[0] array[1] array[2] 0,1,2 = index
+// => index < array.length
+
+</script>
+
+</html>

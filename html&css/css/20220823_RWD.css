@@ -1,0 +1,450 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.wrap {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+@media (max-width:1350px) {
+    .wrap {
+        width: 100vw;
+        height: 1024px;
+    }
+}
+
+@media (max-width:1150px) {
+    .wrap {
+        width: 100vw;
+        height: 1024px;
+        display: block;
+    }
+}
+
+@media (max-width:480px) {
+    .wrap {
+        width: 100vw;
+        height: 667px;
+        display: block;
+    }
+}
+
+.nav {
+    width: 368px;
+    height: 100%;
+    background-color: #FFE153;
+}
+
+@media (max-width:1350px) {
+    .nav {
+        width: 354px;
+    }
+}
+
+@media (max-width:1150px) {
+    .nav {
+        width: 100%;
+        height: 96px;
+    }
+}
+
+@media (max-width:480px) {
+    .nav {
+        width: 100%;
+        height: 96px;
+    }
+}
+
+.selfie {
+    width: 152px;
+    height: 144px;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR5yFZhxhotOzFfKsnl_6ZOc80l4rrvZyi6w&usqp=CAU);
+    background-position: 80% 0;
+    background-size: cover;
+    margin: auto;
+    margin-top: 80px;
+    border-radius: 10px;
+}
+
+@media (max-width:1350px) {
+    .selfie {
+        width: 148px;
+        height: 144px;
+        margin-top: 84px;
+    }
+}
+
+@media (max-width:1150px) {
+    .selfie {
+        width: 80px;
+        height: 84px;
+        margin-top: 6px;
+        margin-left: 28px;
+    }
+}
+
+@media (max-width:480px) {
+    .selfie {
+        width: 80px;
+        height: 84px;
+        margin-top: 6px;
+        margin: auto;
+    }
+}
+
+.selfie:hover {
+    background-image: url(https://cdn2.ettoday.net/images/3587/3587612.jpg);
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.hyper {
+    width: 166px;
+    height: 124px;
+    margin: auto;
+    margin-top: 56px;
+}
+
+@media (max-width:1350px) {
+    .hyper {
+        width: 108px;
+        height: 100px;
+        margin-top: 64px;
+    }
+}
+
+@media (max-width:1150px) {
+    .hyper {
+        width: 366px;
+        height: 96px;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        transform: translate(-100%, 0);
+        margin: 0;
+       display: flex;
+    }
+}
+
+@media (max-width:480px) {
+    .hyper {
+        width: 100px;
+        height: 100%;
+        margin: 0;
+        position: absolute;
+        top: 96px;
+        left: 100px;
+        z-index: 999;
+        display: none;
+    }
+}
+
+.hyper>a {
+    display: block;
+    width: 100%;
+    height: 30%;
+    margin: 10px 0;
+    border: solid 1px white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: '微軟正黑體';
+    font-weight: bold;
+    background-color: #FFF0AC;
+    border-radius: 10px;
+    color: #8C8C00;
+}
+
+@media (max-width:1350px) {
+    .hyper>a {
+        line-height: 30px;
+    }
+}
+
+@media (max-width:1150px) {
+    .hyper>a {
+        width: 92px;
+        height: 80px;
+        margin: 6px 30px 0 0;
+        line-height: 80px;
+    }
+}
+
+@media (max-width:480px) {
+    .hyper>a {
+        float:none;
+        width: 92px;
+        height: 80px;
+        margin:0;
+        line-height: 80px;
+        font-size: 18px;
+    }
+}
+
+/* .hyper>a:visited{
+    color: #FF95CA	;
+} */
+
+.hyper>a:hover {
+    color: #FFF0AC;
+    background-color: #c93;
+}
+
+.hyper>a:active {
+    background-color: #F75000;
+}
+
+.content {
+    width: calc(100% - 368px);
+    height: 100%;
+    position: relative;
+    background-image: linear-gradient(to left, #FFFFB9, #FFFF93)
+}
+@media (max-width:1350px) {
+    .content {
+        width: calc(100% - 354px);
+    }
+}
+
+@media (max-width:1150px) {
+    .content {
+        width: 100%;
+        height: calc(100% - 96px);
+    }
+}
+
+@media (max-width:480px) {
+    .content {
+        height: calc(100% - 96px);
+        width: 100%;
+    }
+}
+
+/*團片區*/
+
+@media (min-width:1350px) {
+    .pics{
+        width: 942px;
+        height: 564px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+    }
+    .pic{
+        width: 312px;
+        height: 564px;
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+    }
+    .pic:hover {
+        transform: scale(1.1, 1.1);
+        box-shadow: black 5px 5px;
+    }
+    .pic1{
+        width: 33%;
+        height: 100%;
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+    }
+    .pic2{
+        width: 32%;
+        height: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        background-image: url(https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg);
+    }
+    .pic3{
+        width: 33%;
+        height: 100%;
+        background-image: url(https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg);
+    }
+}
+@media (max-width:1350px) {
+    .pics{
+    width: 784px;
+        height: 556px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .pic{
+        width: 312px;
+        height: 564px;
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+    }
+    .pic:hover {
+        transform: scale(1.1, 1.1);
+        box-shadow: black 5px 5px;
+    }
+    .pic1{
+        width: 784px;
+        height: 278px;
+        margin-bottom: 10px;  
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+    }
+    .pic2{
+        width: 387px;
+        height: 268px;
+        margin-right: 5px;
+        background-image: url(https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg);
+    }
+    .pic3{
+        width: 387px;
+        height: 268px;
+        background-image: url(https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg);
+        margin-left: 5px;
+    }
+}
+
+@media (max-width:1150px) {
+    .pics {
+       width: 90%;
+       height: 785px;
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       display: flex;
+       flex-wrap: wrap;
+   }
+
+   .pic {
+       background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+       background-position: center;
+       background-repeat: no-repeat;
+       background-size: cover;
+       border-radius: 10px;
+   }
+
+   .pic:hover {
+       transform: scale(1.1, 1.1);
+       box-shadow: black 5px 5px;
+   }
+
+   .pic1 {
+       width: 100%;
+       height: 400px;
+       margin-bottom: 5px;
+       background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+   }
+
+   .pic2 {
+       width: 49%;
+       height: 375px;
+       margin-right: 1%;
+       background-image: url(https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg);
+   }
+
+   .pic3 {
+       width: 49%;
+       height: 375px;
+       background-image: url(https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg);
+       margin-left: 1%;
+   }
+}
+@media (max-width:480px) {
+    .pics {
+        width: 90%;
+        height: 571px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .pic {
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 33.3%;
+    }
+    
+    .pic:hover {
+        transform: scale(1.05, 1.05);
+        box-shadow: black 5px 5px;
+    }
+    
+    .pic1 {
+        background-image: url(https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png);
+    }
+    
+    .pic2 {
+        background-image: url(https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg);
+    }
+    
+    .pic3 {
+        background-image: url(https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg);
+    }
+    
+    .ham-menu {
+        width: 80px;
+        height: 80px;
+        background-color: yellowgreen;
+        position: absolute;
+        display: block;
+        margin-top: 8px;
+        margin-left: 10px;
+        border-radius: 10px;
+    }
+    
+    .ham-menu .line {
+        width: 80%;
+        height: 10px;
+        background-color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition-duration: 1s;
+    }
+    
+    .ham-menu .line-1 {
+        top: 25%;
+    }
+    
+    .ham-menu .line-2 {
+        top: 50%;
+    }
+    
+    .ham-menu .line-3 {
+        top: 75%;
+    }
+    
+    #ham-menu-switch:checked+.ham-menu .line-1 {
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    
+    #ham-menu-switch:checked+.ham-menu .line-2 {
+        display: none;
+    }
+    
+    #ham-menu-switch:checked+.ham-menu .line-3 {
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    
+    #ham-menu-switch:checked~.hyper {
+        display: block;
+    }
+}

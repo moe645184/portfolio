@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        width: 100%;
+        height: 90vh;
+    }
+
+    main {
+        width: 50%;
+        margin: auto;
+        height: 100%;
+    }
+
+    .wrap {
+        width: 100%;
+        border: 3px solid grey;
+        margin-top: 5%;
+        text-align: center;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: #ccc;
+        border-radius: 10px;
+    }
+
+    .wrap .item label {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .wrap .buttons button {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .wrap .buttons .calc {
+        padding: 10px;
+        margin-right: 15%;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .wrap .buttons .clear {
+        padding: 10px;
+        margin-left: 15%;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .result {
+        height: 25%;
+        border: 3px solid grey;
+        margin-top: 5%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border-radius: 10px;
+        opacity: 0;
+        transition: all 1s;
+    }
+</style>
+
+<body>
+    <main>
+        <div class="wrap">
+            <h1>BMI計算機</h1>
+            <div class="item">
+                <label>請輸入身高(cm) <input type="text" placeholder="請輸入身高(cm)"></label>
+            </div>
+            <div class="item">
+                <label>請輸入體重(kg) <input type="text" placeholder="請輸入體重(kg)"></label>
+            </div>
+            <div class="item buttons">
+                <button class="calc">開始計算</button>
+                <button class="clear">重新計算</button>
+            </div>
+        </div>
+
+        <div class="result">
+            <p class="BMI"></p>
+            <p class="body"></p>
+            <p class="advise"></p>
+        </div>
+    </main>
+</body>
+
+<script>
+    let cm, kg, calc, clear, result, BMI, body, advise, a, b, c
+    cm = document.getElementsByTagName('input')[0]
+    kg = document.getElementsByTagName('input')[1]
+    calc = document.getElementsByTagName('button')[0]
+    clear = document.getElementsByTagName('button')[1]
+    result = document.querySelector('.result')
+    BMI = document.querySelector('.BMI')
+    body = document.querySelector('.body')
+    advise = document.querySelector('.advise')
+
+    calc.onclick = function () {
+        if (cm.value <= 0 || kg.value <= 0 || isNaN(cm.value) || isNaN(kg.value) || kg.value.trim() == '' || cm.value.trim() == '') {
+            BMI.innerHTML = '<h2>大俠已失敗，請重新來過</h2>'
+            result.style.opacity = 1;
+        } else {
+            a = cm.value / 100
+            console.log(a)
+            b = kg.value
+            c = b / a / a
+            BMI.innerHTML = `<h2>BMI值:${c.toFixed(1)}`
+        }
+
+        if (cm.value <= 0 || kg.value <= 0 || isNaN(cm.value) || isNaN(kg.value) || kg.value.trim() == '' || cm.value.trim() == '') {
+            body.innerHTML = '<p>得不到的BMI，如同追不到的女朋友</p>'
+            advise.innerHTML = "<p>請重新確認您輸入的數值</p>"
+        } else {
+            if (c >= 35) {
+                body.innerHTML = '<h2>凶殘養殖大肚肉</h2>'
+                advise.innerHTML = '<h2>啊啊啊啊啊啊啊啊啊啊啊啊！！！！</h2>'
+            }
+            else if (c < 35 && c >= 30) {
+                body.innerHTML = '<h2>養殖大肚肉</h2>'
+                advise.innerHTML = '<h2>騷年啊！你已經強過頭了，快回頭吧！</h2>'
+            }
+            else if (c < 30 && c >= 27) {
+                body.innerHTML = '<h2>野生大肚肉</h2>'
+                advise.innerHTML = '<h2>騷年！你的能量已經逐漸在失控了啊！</h2>'
+            }
+            else if (c < 27 && c >= 24) {
+                body.innerHTML = '<h2>中肚肉</h2>'
+                advise.innerHTML = '<h2>騷年，看來你已經獲得禁忌的能量了</h2>'
+            }
+            else if (c < 24 && c >= 18.5) {
+                body.innerHTML = '<h2>背肉</h2>'
+                advise.innerHTML = '<h2>騷年，看來你已經是普通人的水準了</h2>'
+            }
+            else {
+                body.innerHTML = '<h2>鰭邊肉</h2>'
+                advise.innerHTML = '<h2>騷年，媽媽很擔心你，加油好嗎</h2>'
+            }
+        }
+
+        /*盡量不要用style，用classList，比較好管理*/
+        result.style.opacity = 1;
+    }
+    clear.onclick = function () {
+        cm.value = ""
+        kg.value = ""
+        result.style.opacity = 0;
+    }
+
+
+</script>
+
+</html>

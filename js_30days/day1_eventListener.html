@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        background: radial-gradient(grey, white)
+    }
+
+    .hint {
+        border: 1px solid white;
+        position: absolute;
+        width: 600px;
+        height: 100px;
+        border-radius: 15px;
+        color: white;
+        left: 0;
+        right: 0;
+        top: 20%;
+        margin: auto;
+        text-align: center;
+        font-size: 40px;
+        line-height: 100px;
+    }
+
+    .wrap {
+        display: flex;
+        margin: auto;
+        justify-content: center;
+    }
+
+    .wrap div {
+        margin: 10px;
+        width: 80px;
+        height: 80px;
+        border: 5px solid white;
+        text-align: center;
+        color: white;
+        border-radius: 15px;
+    }
+
+
+    .red {
+        color: red !important;
+    }
+</style>
+
+<body>
+    <div class="hint">您現在點擊的是</div>
+    <div class="wrap">
+        <div data-code="65" class='btn'>
+            <h1>A</h1>
+            <p>Apple</p>
+        </div>
+        <div data-code="66" class='btn'>
+            <h1>B</h1>
+            <p>Bee</p>
+        </div>
+        <div data-code="67" class='btn'>
+            <h1>C</h1>
+            <p>Cat</p>
+        </div>
+        <div data-code="68" class='btn'>
+            <h1>D</h1>
+            <p>Dog</p>
+        </div>
+        <div data-code="69" class='btn'>
+            <h1>E</h1>
+            <p>Egg</p>
+        </div>
+        <div data-code="70" class='btn'>
+            <h1>F</h1>
+            <p>Fog</p>
+        </div>
+        <div data-code="71" class='btn'>
+            <h1>G</h1>
+            <p>Game</p>
+        </div>
+        <div data-code="72" class='btn'>
+            <h1>H</h1>
+            <p>Hot</p>
+        </div>
+        <div data-code="73" class='btn'>
+            <h1>I</h1>
+            <p>Ice</p>
+        </div>
+    </div>
+
+    <script>
+        let btns = document.querySelectorAll('.btn')
+        let hint = document.querySelector('.hint')
+
+        btns.forEach(btn => {
+            //監聽事件click
+            btn.addEventListener('click', function () {
+
+                //重置顏色
+                btns.forEach(btn => {
+                    btn.classList.remove('red')
+                });
+
+                //點擊的那個變色
+                btn.classList.add('red')
+
+                //把字印上去
+                let content = btn.querySelector('p').textContent
+                hint.innerHTML = content
+            })
+
+        });
+    </script>
+</body>

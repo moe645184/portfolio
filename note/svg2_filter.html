@@ -1,0 +1,561 @@
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<pre>
+    <h1>SVG 2: 濾鏡</h1>
+                            資料來源：https://www.w3schools.com/graphics/svg_intro.asp
+                                    https://ithelp.ithome.com.tw/m/articles/10200720
+    <h2>9. filter 濾鏡 *result屬性能夠提供其他過濾器由in直接引用結果</h2>
+                        資料來源：https://umasss.medium.com/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82svg%E4%B8%AD%E6%89%80%E6%9C%89%E5%B8%B8%E7%94%A8%E7%9A%84%E6%BF%BE%E9%8F%A1-3cfa92768a97
+            a.須寫在defs中，要用filter=url(#id)
+            b.in = "SourceGraphic" 定義為整個元素效果
+            c.stdDeviation 屬性定義模糊量
+            d.filter 中的x,y值最大為1(原始元素的右下角)，最小為0(原始元素的左上角)
+    
+            <h3>9-1 < feFlood>想像成油漆桶工具，將整個畫面填滿某個顏色，還能加上透明度。</h3>
+                屬性：
+                    flood-color(顏色) 
+                    flood-opacity(透明度)
+            <svg>
+                <defs>
+                    <filter id="flood">想像成油漆桶工具，將整個畫面填滿某個顏色，還能加上透明度。
+                        <feFlood flood-color="#00ff00" flood-opacity="0.6" />
+                    </filter>
+                </defs>
+                <rect height="100" width="100" filter="url(#flood)" />
+            </svg>
+            < svg>
+                < defs>
+                    < filter id="flood">
+                        < feFlood flood-color="#00ff00" flood-opacity="0.6" />
+                    < /filter>
+                < /defs>
+                < rect height="100" width="100" filter="url(#flood)" />
+            < /svg>
+    
+            <h3>9-2 < feBlend> - 想像成修圖軟體的混合模式</h3>
+                屬性：我們需要告訴SVG，誰是那片濾鏡(in2)，誰是風景(in)。
+                    in(輸入來源1)
+                    in2(輸入來源2)
+                    mode：mode：normal 一般, multiply 色彩增值, darken 暗化, screen 網屏, lighten 亮化
+            <svg>
+                <filter id="floodAndBlend">
+                    <feFlood flood-color="#faa" result="myFlood"/>
+                    <feBlend in="SourceGraphic" in2="myFlood" mode="screen"/>
+                </filter>
+                <rect height="100" width="100" filter="url(#floodAndBlend)" />
+            </svg>
+            < svg>
+                < filter id="floodAndBlend">
+                    < feFlood flood-color="#faa" result="myFlood"/>
+                    < feBlend in="SourceGraphic" in2="myFlood" mode="screen"/>
+                < /filter>
+                < rect height="100" width="100" filter="url(#floodAndBlend)" />
+            < /svg>
+    
+            <h3>9-3 < feTurbulence>想像是一種雜訊，但不是粒子狀的雜訊，是RGBA都雜訊的圖像。</h3>
+                屬性:
+                    baseFrequency (雜訊圖檔大小 0.01 ~ 1，預設0)
+                    numOctaves (雜訊精緻度 1~10，預設1)
+                    seed (雜訊圖檔種子碼。形狀而已，不影響密度什麼的。預設0)
+                    stitchTiles (雜訊圖檔是否拼接，noStitch不拼接 stitch拼接)
+                    type：fractalNoise較”霧面”,turbulence較顆粒
+            <svg>
+                <filter id="feTurbulence">
+                    <feTurbulence
+                        baseFrequency="0.05"
+                        numOctaves="1"
+                        seed="100"
+                        type="turbulence"
+                        stitchTiles="noStitch"/>
+                </filter>
+                <circle fill="#ff0000" r="100" filter="url(#feTurbulence)" />
+            </svg>
+    
+            < svg>
+                < filter id="feTurbulence">
+                    < feTurbulence
+                        baseFrequency="0.05"
+                        numOctaves="1"
+                        seed="100"
+                        type="turbulence"
+                        stitchTiles="noStitch"/>
+                < /filter>
+                < circle fill="#ff0000" r="100" filter="url(#feTurbulence)" />
+            < /svg>
+    
+            <h3>9-4 < feDisplacementMap>對圖形進行形變，扭曲，液化。</h3>
+                屬性：
+                    公式：P'(x,y) ← P(x + scale * (XC(x,y) - 0.5), y + scale * (YC(x,y) - 0.5))
+                    in(輸入來源1)，為P(x,y)位置
+                    in2(輸入來源2)，為位移提供XC及XY的對象。
+                    scale(幅度)
+                    xChannelSelector (X座標要用RGBA什麼顏色，預設是A 透明度，XC(x,y)，範圍0~1)
+                    yChannelSelector (Y座標要用RGBA什麼顏色，預設是A 透明度,YC(x,y)，範圍0~1)
+                    <svg>
+                        <filter id="feDisplacementMapAndfeTurbulence">
+                            <feTurbulence
+                            type="turbulence"
+                            baseFrequency="0.05"
+                            numOctaves="1"
+                            seed="100"
+                            stitchTiles="noStitch"
+                            result="turbulence"/>
+                            <feDisplacementMap
+                            in="SourceGraphic"
+                            in2="turbulence"
+                            scale="25"
+                            xChannelSelector="Y"
+                            yChannelSelector="A" />
+                        </filter>
+                        <circle fill="green" cx="50" cy="50" r="50" filter="url(#feDisplacementMapAndfeTurbulence)" />
+                    </svg>
+                    < svg>
+                        < filter id="feDisplacementMapAndfeTurbulence">
+                            < feTurbulence
+                            type="turbulence"
+                            baseFrequency="0.05"
+                            numOctaves="1"
+                            seed="100"
+                            stitchTiles="noStitch"/>
+                            < feDisplacementMap
+                            in="SourceGraphic"
+                            in2="turbulence"
+                            scale="25"
+                            xChannelSelector="Y"
+                            yChannelSelector="A" />
+                        < /filter>
+                        < circle fill="green" cx="50" cy="50" r="50" filter="url(#feDisplacementMapAndfeTurbulence)" />
+                    < /svg>
+    
+    
+    
+            <h3>9-5 < feColorMatrix> - 顏色的調校，原本像素的RGBA通道各乘上不同數值之後輸出。數值為一組陣列。需要三個屬性：in (來源圖檔)、type(濾鏡本身提供的顏色調整類型)、values (需要乘上的數值，是陣列)</h3>
+                屬性：
+                    in(來源圖檔)
+                    type(濾鏡本身提供的顏色調整類型):matrix(矩陣)、sature(飽和度)、hueRotate(色相環旋轉)、luminanceToAlpha(遮色片)
+                    values(需要乘上的數值，type是matrix時，為矩陣): 為5*4陣列為RGBA，數值可為負數及小數   sature時，為0以上的數值。 hueRotate時，為角度 IuminanceToAlpha時，無value
+                        例子： 1 2 3 4 5
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 1 0
+                        RBGA中R的變化為：
+                        255[(255/255)*1 + 0*2 + 0*3 + 0*4 +5] = 255*6
+    
+    <svg width="200" height="200"> 
+        <defs>
+            <filter id="matrix">     
+                <feColorMatrix type="matrix" values="-1 0 0 0 0
+                0 2 0 0 0
+                0 0 1 0 0
+                0 0 0 1 0" />
+            </filter> 
+        </defs>   
+        <image width="200" height="200" filter="url(#matrix)" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811"/>
+    </svg>
+
+        < svg width="200" height="200"> 
+            < defs>
+                < filter id="matrix">     
+                    < feColorMatrix type="matrix" values="-1 0 0 0 0
+                    0 2 0 0 0
+                    0 0 1 0 0
+                    0 0 0 1 0" />
+                < /filter> 
+            < /defs>   
+            < image width="200" height="200" filter="url(#matrix)" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811"/>
+        < /svg>
+    
+            <h3>9-6 < feImage>嵌入圖檔，嵌入的圖當將會顯示成點陣圖，即使嵌入SVG也一樣。</h3>
+            這個方法可以將圖檔嵌入外部圖檔。設計師指需要一個屬性：xlink:href (連結路徑)，用href代替xlink:href也可以，只是如此只能支援SVG 2以下版本，使用SVG 2以下的Safari將不能支援。如果設計師是在React中使用xlinkHref可用代替xlink:href。
+    <svg >
+        <filter id="image">
+            <feImage  xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" />
+        </filter>
+        <rect width="200" height="200" filter="url(#image)"/>
+    </svg>
+
+        < svg >
+            < filter id="image">
+                < feImage  xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" />
+            < /filter>
+            < rect width="200" height="200" filter="url(#image)"/>
+        < /svg>
+
+            <h3>9-7 < feGaussianBlur>高斯模糊，陰影模糊強弱</h3>
+                屬性：
+                    in 來源圖檔
+                    stdDeviation 模糊程度
+                <svg>
+                    <defs>
+                        <filter id="blur">
+                            <feGaussianBlur
+                            in="SourceGraphic"
+                            stdDeviation="5" />
+                        </filter>
+                    </defs>
+                    <rect width="100" height="50" x="10" y="10" fill="green" stroke="black" filter="url(#blur)"/>
+                </svg>
+    
+                < svg>
+                    < defs>
+                        < filter id="blur">
+                            < feGaussianBlur
+                            in="SourceGraphic"
+                            stdDeviation="5" />
+                        < /filter>
+                    < /defs>
+                    < rect width="100" height="50" x="10" y="10" fill="green" stroke="black" filter="url(#blur)"/>
+                < /svg>
+    
+            <h3>9-8 < pattern>並不屬於filter之一，但經常與其他濾鏡配合，將它放至於< defs>之中即可使用。注意這必須使用fill填入。</h3>
+                <svg>
+                    <defs>
+                        <pattern id="star" viewBox="0,0,10,10" width="10%" height="10%">
+                            <polygon points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2"/>
+                        </pattern>
+                    </defs>
+                        <rect width="100" height="100" fill="url(#star)"/>
+                </svg>
+    
+                < svg>
+                    < defs>
+                        < pattern id="star" viewBox="0,0,10,10" width="10%" height="10%">
+                            < polygon points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2"/>
+                        < /pattern>
+                    < /defs>
+                        < rect width="100" height="100" fill="url(#star)"/>
+                < /svg>
+    
+    
+            <h3>9-9 < feComposite>用在兩個形狀的布林運算</h3>
+                屬性：
+                in 來源圖檔1
+                in2 來源圖檔2
+                operator：over(全部), in(交集部分), out(來源1，不含被來源2覆蓋部分), xor(除了交集以外部分), atop(來源2), arithmetic(算數)。
+                  *arithmetic: 結果= k1*i1*i2 + k2*i1 + k3*i2 + k4  k1~k4為屬性，i1及i2為 in1及in2的像素
+                                    k1：i1及i2交集的部分 k2：i1的部分 k3：i2的部分 k4：整體
+                <svg
+                style="width:800px; height:200px; display: inline;">
+                <defs>
+                    <filter id="imageOver">
+                        <feImage
+                        xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811"
+                        x="10px"
+                        y="10px"
+                        width="160px" />
+                        <feComposite in2="SourceGraphic" operator="over" />
+                    </filter>
+                </defs>
+                <g transform="translate(0,25)">
+                    <circle
+                    cx="90px"
+                    cy="80px"
+                    r="70px"
+                    fill="#c00"
+                    style="filter:url(#imageOver)" />
+                    <text x="80" y="-5">over</text>
+                </g>
+            </svg>
+    
+            <h3>9-10 < feComponentTransfer>針對圖像中每一個像素，利用公式的計算，進行亮度、對比...等調整</h3>
+            裡面會有四個標籤：
+                    feFuncR
+                    feFuncG
+                    feFuncB
+                    feFuncA
+                其屬性為：
+                    type：
+                        identity 表示功能相同
+                        table 使用參數 tableValues 數值為0.0 ~ 1.0，中間會根據設定的值做漸層
+                        discrete 使用參數 tableValues 數值為0.0 ~ 1.0，中間"不"會根據設定的值做漸層
+                        linear 使用參數：slope 斜率 及 intercept 截距 。用一個線性斜率來計算顏色分布 公式：slope * in + intercept
+                        gamma 使用參數：amplitude 震幅  exponent 指數  offset 抵銷。公式： amplitude * pow(in, exponent) + offset
+    
+            <h3>9-11 < feConvolveMatrix>進行銳利化，同時它也可以進行模糊的動作</h3>
+            標籤：
+            in 來源圖檔
+            order 矩陣大小。預設是 3 X 3。
+            kernelMatrix 矩陣本人內的數值設定順序為 左到右 上到下。
+            divisor 矩陣總和會除上divisor才產生目標值。默認情況下，它設置為1。
+            bias 應用divisor時才會有作用，會在最後的值加上bias。默認情況下，它設置為 0。
+            targetX 水平移動卷積矩陣。（範圍- 0 <= targetX < orderX）。
+            targetY 它垂直移動卷積矩陣。（範圍- 0 <= targetY < orderY）。
+            kernelUnitLength 它告訴 kernelMatrix 中連續列和行之間的預期距離。預期距離以當前過濾器單位表示。默認值為1。
+            preserveAlpha 它的值為真或假。它指示卷積是否僅適用於 alpha 和顏色通道。默認值為假。
+        <svg width="450" height="200">
+            <defs>
+                <filter id="emboss">
+                    <feConvolveMatrix
+                    kernelMatrix="1 0 0 0 0 0 0 0 -3"/>
+                </filter>
+            </defs>
+            <image xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" />
+            <image x="220" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" filter="url(#emboss)"/>
+        </svg>
+            < svg width="450" height="200">
+                < defs>
+                    < filter id="emboss">
+                        < feConvolveMatrix
+                        kernelMatrix="1 0 0 0 0 0 0 0 -3"/>
+                    < /filter>
+                < /defs>
+                < image xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" />
+                < image x="220" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" filter="url(#emboss)"/>
+            </svg>
+    
+            <h3>9-12 < feDiffuseLighting></h3>
+                屬性：
+                    in：來源圖檔
+                    lighting-color：光源顏色
+                    surfaceScale：亮度
+                    diffuseConstant：發光點大小
+                標籤：
+                    fePointLight：點光源 屬性：x y z 表示光源位置
+                    feDistantLight：遠光源 屬性： azimuth 光的角度 elevation 光的高度
+                    feSpotLight：聚光燈 屬性：x y z 光源位置 pointAtX pointAtY pointAtZ 光源照往哪個位置 specularExponent 光源焦點，數值越大光線越集中 limitingConeAngle 設一個錐形角度，光線會被限制其中
+                      *遠燈跟聚光燈搭配feComposite的arithhmetic使用
+        <svg width="450" height="200">
+            <defs>
+                <filter id="spotLight">
+                    <feDiffuseLighting in="SourceGraphic" lighting-color="orange">
+                        <feSpotLight x="0" y="5" z="50" pointsAtX="390" pointsAtY="80" pointsAtZ="200"  />
+                            </feDiffuseLighting>
+                            <feComposite
+                            in="SourceGraphic"
+                            in2="light"
+                            operator="arithmetic"
+                            k1="2"
+                            k2="1"
+                            k3="0"
+                            k4="0" />
+                </filter>
+            </defs>
+            <image x="0" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" />
+            <image x="220" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" filter="url(#spotLight)"/>
+        </svg>
+            < svg width="450" height="200">
+                < defs>
+                    < filter id="spotLight">
+                        < feDiffuseLighting in="SourceGraphic" lighting-color="orange">
+                            < feSpotLight x="0" y="5" z="50" pointsAtX="390" pointsAtY="80" pointsAtZ="200"  />
+                                < /feDiffuseLighting>
+                                < feComposite
+                                in="SourceGraphic"
+                                in2="light"
+                                operator="arithmetic"
+                                k1="2"
+                                k2="1"
+                                k3="0"
+                                k4="0" />
+                    < /filter>
+                < /defs>
+                < image x="0" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" />
+                < image x="220" xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811" height="200" width="200" filter="url(#spotLight)"/>
+            < /svg>
+    
+            <h3>9-13 < feMerge></h3>
+                標籤：< feMergeNode in=""/> 要合併的圖案
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+            <filter id="feOffset" x="-40" y="-20" width="100" height="200">
+                <feOffset in="SourceGraphic" dx="60" dy="60" />
+                <feGaussianBlur stdDeviation="5" result="blur2" />
+                <feMerge>
+                    <feMergeNode in="blur2" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <rect
+                x="40"
+                y="40"
+                width="100"
+                height="100"
+                style="stroke: #000000; fill: green; filter: url(#feOffset);" />
+        </svg>
+    
+            < svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                < filter id="feOffset" x="-40" y="-20" width="100" height="200">
+                    < feOffset in="SourceGraphic" dx="60" dy="60" />
+                    < feGaussianBlur stdDeviation="5" result="blur2" />
+                    < feMerge>
+                        < feMergeNode in="blur2" />
+                        < feMergeNode in="SourceGraphic" />
+                    < /feMerge>
+                < /filter>
+                < rect
+                    x="40"
+                    y="40"
+                    width="100"
+                    height="100"
+                    style="stroke: #000000; fill: green; filter: url(#feOffset);" />
+            </svg>
+    
+    
+            <h3>9-14 < feMorphology> 變形</h3>
+                屬性：
+                in
+                operator：erode 侵蝕(預設) dilate 擴張
+                radius
+    
+        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="180">
+            <filter id="erode">
+                <feMorphology operator="erode" radius="1" />
+            </filter>
+            <filter id="dilate">
+                <feMorphology operator="dilate" radius="2" />
+            </filter>
+            <text y="20">Normal text</text>
+            <text id="thin" y="80" style="filter: url(#erode) ; font-size:26px" >Thinned text</text>
+            <text id="thick" y="140" style="filter: url(#dilate)  ; font-size:26px" >Fattened text</text>
+        </svg>
+    
+            < svg xmlns="http://www.w3.org/2000/svg" width="300" height="180">
+                < filter id="erode">
+                    < feMorphology operator="erode" radius="1" />
+                < /filter>
+                < filter id="dilate">
+                    < feMorphology operator="dilate" radius="2" />
+                < /filter>
+                < text y="20">Normal text</text>
+                < text id="thin" y="80" style="filter: url(#erode) ; font-size:26px" >Thinned text</text>
+                < text id="thick" y="140" style="filter: url(#dilate)  ; font-size:26px" >Fattened text</text>
+            < /svg>
+    
+    
+            <h3>9-15 < feOffset> - Offset：偏移輸入影像位置</h3>
+            屬性：
+                in：輸入圖源
+                dx：X軸偏移量
+                dy：Y軸偏移量
+    
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="offset" width="180" height="180">
+                    <feOffset in="SourceGraphic" dx="60" dy="60" />
+                </filter>
+            </defs>
+            <rect x="0" y="0" width="100" height="100" stroke="black" fill="green" />
+            <rect
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+                stroke="black"
+                fill="green"
+                filter="url(#offset)" />
+        </svg>
+            < svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                < defs>
+                    < filter id="offset" width="180" height="180">
+                        < feOffset in="SourceGraphic" dx="60" dy="60" />
+                    < /filter>
+                < /defs>
+                < rect x="0" y="0" width="100" height="100" stroke="black" fill="green" />
+                < rect
+                    x="0"
+                    y="0"
+                    width="100"
+                    height="100"
+                    stroke="black"
+                    fill="green"
+                    filter="url(#offset)" />
+            < /svg>
+    
+            <h3>9-16 < feSpecularLighting> 配合feComposite。</h3>
+            屬性：
+                in：輸入圖源
+                surfaceScale：表面高度
+                specularConstant：鏡面照明的反射率
+                specularExponent：光源焦點
+                kernelUnitLength：
+                light-color
+            標籤：fePointLight: x y z  **一定要設定
+    
+        <svg width="200" height="200">
+            <defs>
+                <filter id="mirror">
+                    <feSpecularLighting
+                    surfaceScale="0.8"
+                    specularConstant="0.8"
+                    specularExponent="40"
+                    lighting-color="green"
+                    result="mir">
+                    <fePointLight x="50" y="75" z="200" />
+                    </feSpecularLighting>
+                    <feComposite
+                    in="SourceGraphic"
+                    in2="mir"
+                    operator="arithmetic"
+                    k1="1"
+                    k2="1"
+                    k3="1"
+                    k4="0"/>
+                </filter>
+            </defs>
+            <rect x="0" y="0" width="200" height="200" filter="url(#mirror)"/>
+        </svg>
+    
+            < svg width="200" height="200">
+                < defs>
+                    < filter id="mirror">
+                        < feSpecularLighting
+                        surfaceScale="0.8"
+                        specularConstant="0.8"
+                        specularExponent="40"
+                        lighting-color="green"
+                        result="mir">
+                        < fePointLight x="50" y="75" z="200" />
+                        < /feSpecularLighting>
+                        < feComposite
+                        in="SourceGraphic"
+                        in2="mir"
+                        operator="arithmetic"
+                        k1="1"
+                        k2="1"
+                        k3="1"
+                        k4="0"/>
+                    < /filter>
+                < /defs>
+                < rect x="0" y="0" width="200" height="200" filter="url(#mirror)"/>
+            < /svg>
+    
+            <h3>9-17 < feTile> 感覺就是個pattern</h3>
+                屬性：
+                    in 要當pattern的圖源
+                    x  要裁切的位置(X)
+                    y  要裁切的位置(Y)
+                    width 要裁切的寬度
+                    height 要裁切的高度
+    
+        <svg width="200" height="200">
+            <defs>
+                <filter id="tile" x="0" y="0" width="100%" height="100%">
+                    <feTile in="SourceGraphic" x="80" y="60" width="100" height="100" />
+                    <feTile />
+                </filter>
+            </defs>
+            <image
+                xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811"
+                height="100%"
+                width="100%"
+                filter="url(#tile)"/>
+        </svg>
+            < svg width="200" height="200">
+                < defs>
+                    < filter id="tile" x="0" y="0" width="100%" height="100%">
+                        < feTile in="SourceGraphic" x="80" y="60" width="100" height="100" />
+                        < feTile />
+                    < /filter>
+                < /defs>
+                < image
+                    xlink:href="https://img.freepik.com/free-photo/close-up-portrait-beautiful-cat_23-2149214373.jpg?w=996&t=st=1663813500~exp=1663814100~hmac=08a70d24c4c2f0d67326917872c4cb410ebe2a86606f79b64dbc414282db5811"
+                    height="100%"
+                    width="100%"
+                    filter="url(#tile)"/>
+            < /svg>
+    
+</pre>
