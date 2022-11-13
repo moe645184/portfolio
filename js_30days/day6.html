@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Type Ahead 👀</title>
+    <title>Type Ahead </title>
 </head>
 
 <style>
@@ -101,53 +101,49 @@
 
         let cities = []
         fetch(endpoint)
-            .then(function (blog) {
-                return blog.json()
+            .then(function (response) {
+                return response.json();
             })
             .then(function (myJson) {
-                //...是展開陣列(把myJson[]拿掉的意思)
-                cities.push(myJson)
-            })
-
-            console.log(cities)
-        //step1 設定function：當我輸入字後，我要過濾cities，找出含有我打的字的城市或者州
-        function findMatches(wordInput, citiesArray) {
-            return citiesArray.filter(city => {
-                const regex = new RegExp(wordInput, 'gi')
-                console.log(city.city.match(regex));
-                //回傳所有符合regex的字(輸入字的大小寫)
-                return city.city.match(regex) || city.state.match(regex)
+                //...抓到最後的陣列
+                cities.push(...myJson)
             });
+            console.log(cities)
+
+        //1.篩選出我輸入的內容
+
+        function wordToMatch(keyName, cityList) {
+            return cityList.filter(city => {
+                const regex = new RegExp(keyName, 'gi')
+                return city.city.match(regex) || city.state.match(regex)
+            })
         }
 
-        //step2 設定function:讓數字有逗號
-        function numberWithCommas(x) {
+        //2.把數字變成有逗號隔開的
+        function comma(x) {
             return Number(x).toLocaleString()
         }
 
-        //step3 設定function:讓我輸入之後可以印出符合篩選的東西
-        function showMatch() {
-            const filterArray = findMatches(this.value, cities)
+        //3.把我要的內容呈現出來
+        function inner() {
+            const filterResult = wordToMatch(this.value, cities)
             //把我篩出來的字的陣列，變成li裡的span
-            const html = filterArray.map(place => {
+            const HTML = filterResult.map(wordToShow => {
                 const regex = new RegExp(this.value, 'gi')
-                //將都市及州的名字找出來，並且把關鍵字的部分取代成變色的span
-                const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
-                const StateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`)
+                const cityName = wordToShow.city.replace(regex, `<span class="hl">${this.value}</span>`)
+                const stateName = wordToShow.state.replace(regex, `<span class="h1">${this.value}</span>`)
                 return `
-                <li>
-                    <span class="name">${cityName},${StateName}</span>
-                    <span class="population">${numberWithCommas(place.population)}</span>
-                </li>
-            `}).join('')
-            //把所有的所有的li的大家都包在' '裡面
-            suggestions.innerHTML = html
+                    <li>
+                        <span class="name">${cityName} ${stateName}</span>
+                        <span class="poopulation">${comma(wordToShow.population)}</span>    
+                    </li>
+                    `
+            }).join('')
+            suggestions.innerHTML = HTML
         }
 
-        //step4 設定輸入的監聽事件
-        searchInput.addEventListener('change', showMatch)
-        searchInput.addEventListener('keyup', showMatch)
-
+        searchInput.addEventListener('change',inner)
+        searchInput.addEventListener('keyup',inner)
     </script>
 </body>
 
